@@ -1,0 +1,45 @@
+{
+  "title": "keyb - Remote Keyboard Toggle",
+  "rules": [
+    {
+      "description": "Cmd+F12: Toggle keyb (send keystrokes to Linux)",
+      "manipulators": [
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "f12",
+            "modifiers": {
+              "mandatory": ["left_command"],
+              "optional": ["any"]
+            }
+          },
+          "to": [
+            {
+              "shell_command": "/bin/bash -c 'echo -ne \"\\x01\" | /usr/bin/nc -U /tmp/keyb.sock'"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "description": "Cmd+Shift+F12: Force OFF keyb",
+      "manipulators": [
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "f12",
+            "modifiers": {
+              "mandatory": ["left_command", "left_shift"],
+              "optional": ["any"]
+            }
+          },
+          "to": [
+            {
+              "shell_command": "/bin/bash -c 'echo -ne \"\\x03\" | /usr/bin/nc -U /tmp/keyb.sock'"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
