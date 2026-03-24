@@ -1,0 +1,20 @@
+# Swift build artifacts
+keyb-mac/.build/
+keyb-mac/.swiftpm/
+keyb-mac/Package.resolved
+
+# C build artifacts
+keyb-linux/keyb-receiver
+keyb-linux/*.o
+keyb-linux/*.d
+
+# macOS
+.DS_Store
+*.swp
+
+# IDE
+.vscode/
+.idea/
+
+# Runtime
+/tmp/keyb.sock
