@@ -2,9 +2,9 @@
 
 ## Overview
 
-Maclinq uses a simple binary protocol over TCP for streaming keyboard events
-from a Mac sender to a Linux receiver. Both sides must implement this
-protocol identically to ensure interoperability.
+Maclinq uses a simple binary protocol over TCP for streaming keyboard and
+mouse events from a Mac sender to a Linux receiver. Both sides must implement
+this protocol identically to ensure interoperability.
 
 ## Connection
 
@@ -40,7 +40,7 @@ Total: **6 bytes**
 
 ## Key Event Packet (Client → Server)
 
-After handshake, the client streams key events:
+After handshake, the client streams keyboard events:
 
 | Offset | Size | Field         | Value / Description                   |
 |--------|------|---------------|---------------------------------------|
@@ -66,6 +66,49 @@ Total: **8 bytes** per event
 
 Note: The Mac sender maps Cmd → Ctrl, Option → Alt before sending.
 The modifiers field reflects the **Linux-side** modifier state.
+
+## Mouse Packets (Client → Server)
+
+Maclinq v1 forwards relative mouse motion, button transitions, and scroll
+wheel deltas. Gesture semantics stay on the Mac side; the sender only emits
+the interpreted pointer events.
+
+### Relative Mouse Move
+
+| Offset | Size | Field | Value / Description |
+|--------|------|-------|---------------------|
+| 0      | 1    | type  | `0x20` = mouse_move |
+| 1      | 2    | dx    | Signed relative X delta (`int16`, network byte order) |
+| 3      | 2    | dy    | Signed relative Y delta (`int16`, network byte order) |
+| 5      | 3    | pad   | `0x00` |
+
+Total: **8 bytes**
+
+### Mouse Button
+
+| Offset | Size | Field  | Value / Description |
+|--------|------|--------|---------------------|
+| 0      | 1    | type   | `0x21` = button_down, `0x22` = button_up |
+| 1      | 1    | button | `0x01` = left, `0x02` = right, `0x03` = middle |
+| 2      | 6    | pad    | `0x00` |
+
+Total: **8 bytes**
+
+### Scroll
+
+| Offset | Size | Field | Value / Description |
+|--------|------|-------|---------------------|
+| 0      | 1    | type  | `0x23` = scroll |
+| 1      | 2    | dx    | Signed horizontal wheel delta (`int16`, network byte order) |
+| 3      | 2    | dy    | Signed vertical wheel delta (`int16`, network byte order) |
+| 5      | 3    | pad   | `0x00` |
+
+Total: **8 bytes**
+
+Notes:
+- Mouse packets are relative; the sender does not transmit absolute cursor coordinates.
+- Dragging is represented as a button-down packet plus subsequent relative move packets.
+- Two-finger scrolling is represented as scroll packets. Higher-level gestures are out of scope for v1.
 
 ## Control Packets (Client → Server)
 

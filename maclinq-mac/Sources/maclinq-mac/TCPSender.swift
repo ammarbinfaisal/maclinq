@@ -25,7 +25,11 @@ final class TCPSender {
             return
         }
 
-        let conn = NWConnection(host: nwHost, port: nwPort, using: .tcp)
+        let tcpOptions = NWProtocolTCP.Options()
+        tcpOptions.noDelay = true
+
+        let parameters = NWParameters(tls: nil, tcp: tcpOptions)
+        let conn = NWConnection(host: nwHost, port: nwPort, using: parameters)
         connection = conn
         connectCompletion = completion
         didFinishConnect = false
@@ -44,13 +48,24 @@ final class TCPSender {
              description: "key event")
     }
 
+    func sendMouseMove(deltaX: Int16, deltaY: Int16) {
+        send(data: Self.mouseMovePacket(deltaX: deltaX, deltaY: deltaY), description: "mouse move")
+    }
+
+    func sendMouseButton(type: UInt8, button: UInt8) {
+        send(data: Self.mouseButtonPacket(type: type, button: button), description: "mouse button")
+    }
+
+    func sendMouseScroll(deltaX: Int16, deltaY: Int16) {
+        send(data: Self.mouseScrollPacket(deltaX: deltaX, deltaY: deltaY), description: "scroll")
+    }
+
     func sendHeartbeat() {
         send(data: Self.controlPacket(type: 0x10), description: "heartbeat")
     }
 
     func disconnect() {
         intentionalDisconnect = true
-        ready = false
         stopHeartbeat()
 
         guard connection != nil else {
@@ -95,6 +110,37 @@ final class TCPSender {
     static func controlPacket(type: UInt8) -> Data {
         var buf = [UInt8](repeating: 0, count: 8)
         buf[0] = type
+        return Data(buf)
+    }
+
+    static func mouseMovePacket(deltaX: Int16, deltaY: Int16) -> Data {
+        var buf = [UInt8](repeating: 0, count: 8)
+        let x = UInt16(bitPattern: deltaX)
+        let y = UInt16(bitPattern: deltaY)
+        buf[0] = 0x20
+        buf[1] = UInt8((x >> 8) & 0xFF)
+        buf[2] = UInt8(x & 0xFF)
+        buf[3] = UInt8((y >> 8) & 0xFF)
+        buf[4] = UInt8(y & 0xFF)
+        return Data(buf)
+    }
+
+    static func mouseButtonPacket(type: UInt8, button: UInt8) -> Data {
+        var buf = [UInt8](repeating: 0, count: 8)
+        buf[0] = type
+        buf[1] = button
+        return Data(buf)
+    }
+
+    static func mouseScrollPacket(deltaX: Int16, deltaY: Int16) -> Data {
+        var buf = [UInt8](repeating: 0, count: 8)
+        let x = UInt16(bitPattern: deltaX)
+        let y = UInt16(bitPattern: deltaY)
+        buf[0] = 0x23
+        buf[1] = UInt8((x >> 8) & 0xFF)
+        buf[2] = UInt8(x & 0xFF)
+        buf[3] = UInt8((y >> 8) & 0xFF)
+        buf[4] = UInt8(y & 0xFF)
         return Data(buf)
     }
 

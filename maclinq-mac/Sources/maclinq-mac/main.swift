@@ -1,11 +1,19 @@
 import CoreGraphics
 import Foundation
 
+struct AppConfig {
+    let host: String
+    let port: UInt16
+    let autoOn: Bool
+    let fixturePath: String?
+}
+
 final class MaclinqApp {
-    private let host: String
-    private let port: UInt16
-    private let capture = KeyCapture()
+    private let config: AppConfig
+    private let keyCapture = KeyCapture()
+    private let mouseCapture = MouseCapture()
     private let stateLock = NSLock()
+    private let fixturePlayback: FixturePlayback?
     private lazy var toggleSocket = ToggleSocket { [weak self] command in
         self?.handleToggleCommand(command) ?? .invalid
     }
@@ -15,18 +23,33 @@ final class MaclinqApp {
     private var isShuttingDown = false
     private var sender: TCPSender?
 
-    init(host: String, port: UInt16) {
-        self.host = host
-        self.port = port
+    init(config: AppConfig) throws {
+        self.config = config
+        if let fixturePath = config.fixturePath {
+            fixturePlayback = try FixturePlayback(path: fixturePath)
+        } else {
+            fixturePlayback = nil
+        }
     }
 
     func start() throws {
-        try toggleSocket.start()
-        print("maclinq-mac: ready; target is \(host):\(port)")
-        print("maclinq-mac: use Karabiner or scripts/maclinq-toggle.sh to toggle forwarding")
+        if fixturePlayback == nil {
+            try toggleSocket.start()
+            print("maclinq-mac: ready; target is \(config.host):\(config.port)")
+            print("maclinq-mac: use Karabiner or scripts/maclinq-toggle.sh to toggle forwarding")
+        } else {
+            print("maclinq-mac: fixture mode enabled; target is \(config.host):\(config.port)")
+        }
+
+        if config.autoOn || fixturePlayback != nil {
+            DispatchQueue.main.async { [weak self] in
+                self?.activate(reason: self?.fixturePlayback != nil ? "fixture mode" : "auto-on")
+            }
+        }
     }
 
     func shutdown(reason: String, exitCode: Int32 = 0) {
+        var senderToDisconnect: TCPSender?
         let shouldContinue: Bool = withLockedState {
             if isShuttingDown {
                 return false
@@ -34,6 +57,8 @@ final class MaclinqApp {
             isShuttingDown = true
             desiredActive = false
             isActive = false
+            senderToDisconnect = sender
+            sender = nil
             return true
         }
 
@@ -42,11 +67,17 @@ final class MaclinqApp {
         }
 
         print("maclinq-mac: shutting down (\(reason))")
-        capture.stop()
-        sender?.disconnect()
-        sender = nil
+        stopCaptures()
         toggleSocket.stop()
-        Foundation.exit(exitCode)
+
+        if let senderToDisconnect {
+            senderToDisconnect.disconnect()
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+                Foundation.exit(exitCode)
+            }
+        } else {
+            Foundation.exit(exitCode)
+        }
     }
 
     private func handleToggleCommand(_ command: UInt8) -> ToggleCommandResult {
@@ -58,7 +89,7 @@ final class MaclinqApp {
             return .noResponse
         case 0x02:
             DispatchQueue.main.async { [weak self] in
-                self?.activate()
+                self?.activate(reason: "force-on command")
             }
             return .noResponse
         case 0x03:
@@ -77,11 +108,11 @@ final class MaclinqApp {
         if currentStatusByte() == 0x01 || isDesiredActive() {
             deactivate(reason: "toggle command")
         } else {
-            activate()
+            activate(reason: "toggle command")
         }
     }
 
-    private func activate() {
+    private func activate(reason: String) {
         let shouldStart: Bool = withLockedState {
             guard !isShuttingDown else {
                 return false
@@ -106,8 +137,8 @@ final class MaclinqApp {
         }
         self.sender = sender
 
-        print("maclinq-mac: connecting to \(host):\(port)")
-        sender.connect(host: host, port: port) { [weak self, weak sender] error in
+        print("maclinq-mac: connecting to \(config.host):\(config.port) (\(reason))")
+        sender.connect(host: config.host, port: config.port) { [weak self, weak sender] error in
             DispatchQueue.main.async {
                 guard let self else { return }
 
@@ -122,20 +153,31 @@ final class MaclinqApp {
                     }
                     self.sender = nil
                     fputs("maclinq-mac: failed to activate forwarding: \(error.localizedDescription)\n", stderr)
+                    if self.fixturePlayback != nil {
+                        self.shutdown(reason: "fixture startup failed", exitCode: 1)
+                    }
                     return
                 }
 
                 do {
-                    try self.capture.start { [weak self, weak sender] type, keyCode, flags in
-                        self?.forwardCapturedEvent(type: type, keyCode: keyCode, flags: flags, sender: sender)
+                    if let fixturePlayback = self.fixturePlayback {
+                        self.withLockedState {
+                            self.isActive = true
+                        }
+                        print("maclinq-mac: active (fixture mode)")
+                        self.runFixturePlayback(fixturePlayback, sender: sender)
+                        return
                     }
+
+                    try self.startLiveCapture(sender: sender)
                 } catch {
                     self.withLockedState {
                         self.desiredActive = false
                     }
+                    self.stopCaptures()
                     sender?.disconnect()
                     self.sender = nil
-                    fputs("maclinq-mac: transport connected, but keyboard capture could not start: \(error.localizedDescription)\n", stderr)
+                    fputs("maclinq-mac: transport connected, but local input capture could not start: \(error.localizedDescription)\n", stderr)
                     return
                 }
 
@@ -145,6 +187,57 @@ final class MaclinqApp {
                 print("maclinq-mac: active")
             }
         }
+    }
+
+    private func startLiveCapture(sender: TCPSender?) throws {
+        do {
+            try keyCapture.start { [weak self, weak sender] type, keyCode, flags in
+                self?.forwardCapturedEvent(type: type, keyCode: keyCode, flags: flags, sender: sender)
+            }
+        } catch {
+            throw NSError(
+                domain: "maclinq-mac",
+                code: 20,
+                userInfo: [NSLocalizedDescriptionKey: "keyboard capture start failed: \(error.localizedDescription)"]
+            )
+        }
+
+        do {
+            try mouseCapture.start { [weak self, weak sender] event in
+                self?.forwardMouseEvent(event, sender: sender)
+            }
+        } catch {
+            keyCapture.stop()
+            throw NSError(
+                domain: "maclinq-mac",
+                code: 21,
+                userInfo: [NSLocalizedDescriptionKey: "mouse capture start failed: \(error.localizedDescription)"]
+            )
+        }
+    }
+
+    private func runFixturePlayback(_ playback: FixturePlayback, sender: TCPSender?) {
+        playback.play(
+            forwardKey: { [weak self, weak sender] type, keyCode, flags in
+                self?.forwardCapturedEvent(type: type, keyCode: keyCode, flags: flags, sender: sender)
+            },
+            forwardMouse: { [weak self, weak sender] event in
+                self?.forwardMouseEvent(event, sender: sender)
+            },
+            completion: { [weak self] error in
+                DispatchQueue.main.async {
+                    guard let self else { return }
+                    if let error {
+                        fputs("maclinq-mac: fixture replay failed: \(error.localizedDescription)\n", stderr)
+                        self.shutdown(reason: "fixture failed", exitCode: 1)
+                        return
+                    }
+
+                    print("maclinq-mac: fixture replay completed successfully")
+                    self.shutdown(reason: "fixture completed", exitCode: 0)
+                }
+            }
+        )
     }
 
     private func deactivate(reason: String) {
@@ -161,7 +254,7 @@ final class MaclinqApp {
         }
 
         print("maclinq-mac: deactivating (\(reason))")
-        capture.stop()
+        stopCaptures()
         sender?.disconnect()
         sender = nil
     }
@@ -179,8 +272,17 @@ final class MaclinqApp {
         }
 
         fputs("maclinq-mac: remote transport dropped; forwarding has been disabled: \(message)\n", stderr)
-        capture.stop()
+        stopCaptures()
         sender = nil
+
+        if fixturePlayback != nil {
+            shutdown(reason: "fixture transport failure", exitCode: 1)
+        }
+    }
+
+    private func stopCaptures() {
+        mouseCapture.stop()
+        keyCapture.stop()
     }
 
     private func forwardCapturedEvent(type: UInt8, keyCode: CGKeyCode, flags: CGEventFlags, sender: TCPSender?) {
@@ -196,12 +298,35 @@ final class MaclinqApp {
             sender.sendKeyEvent(type: type, keycode: 0, modifiers: modifiers, timestampMs: timestamp)
         case 0x01, 0x02:
             guard let mappedKeyCode = KeyMapper.mapKeyCode(keyCode) else {
-                fputs("maclinq-mac: no Linux evdev mapping for macOS keycode \(keyCode); event dropped\n", stderr)
+                fputs("maclinq-mac: no Linux evdev mapping for macOS keycode \(keyCode); keyboard event dropped\n", stderr)
                 return
             }
             sender.sendKeyEvent(type: type, keycode: mappedKeyCode, modifiers: modifiers, timestampMs: timestamp)
         default:
-            fputs("maclinq-mac: unexpected capture event type 0x\(String(format: "%02X", type)); event dropped\n", stderr)
+            fputs("maclinq-mac: unexpected keyboard capture event type 0x\(String(format: "%02X", type)); event dropped\n", stderr)
+        }
+    }
+
+    private func forwardMouseEvent(_ event: MouseForwardEvent, sender: TCPSender?) {
+        guard currentStatusByte() == 0x01, let sender else {
+            return
+        }
+
+        switch event {
+        case .move(let deltaX, let deltaY):
+            guard deltaX != 0 || deltaY != 0 else {
+                return
+            }
+            sender.sendMouseMove(deltaX: deltaX, deltaY: deltaY)
+        case .buttonDown(let button):
+            sender.sendMouseButton(type: 0x21, button: button)
+        case .buttonUp(let button):
+            sender.sendMouseButton(type: 0x22, button: button)
+        case .scroll(let deltaX, let deltaY):
+            guard deltaX != 0 || deltaY != 0 else {
+                return
+            }
+            sender.sendMouseScroll(deltaX: deltaX, deltaY: deltaY)
         }
     }
 
@@ -229,28 +354,74 @@ final class MaclinqApp {
 
 private func printUsageAndExit() -> Never {
     let program = (CommandLine.arguments.first as NSString?)?.lastPathComponent ?? "maclinq-mac"
-    fputs("Usage: \(program) [host] [port]\n", stderr)
+    fputs("Usage: \(program) [--auto-on] [--fixture PATH] [host] [port]\n", stderr)
     fputs("Defaults: host=192.168.1.19 port=7680\n", stderr)
+    fputs("--fixture replays scripted events and implies immediate activation\n", stderr)
     Foundation.exit(2)
 }
 
-private func parseArguments() -> (String, UInt16) {
+private func parsePort(_ value: String) -> UInt16? {
+    UInt16(value)
+}
+
+private func parseArguments() -> AppConfig {
+    var autoOn = false
+    var fixturePath: String?
+    var positional: [String] = []
     let args = Array(CommandLine.arguments.dropFirst())
-    if args.contains("--help") || args.contains("-h") || args.count > 2 {
+    var index = 0
+
+    while index < args.count {
+        let arg = args[index]
+
+        switch arg {
+        case "--help", "-h":
+            printUsageAndExit()
+        case "--auto-on":
+            autoOn = true
+        case "--fixture":
+            index += 1
+            guard index < args.count else {
+                fputs("maclinq-mac: --fixture requires a path argument\n", stderr)
+                printUsageAndExit()
+            }
+            fixturePath = args[index]
+        default:
+            if arg.hasPrefix("--fixture=") {
+                fixturePath = String(arg.dropFirst("--fixture=".count))
+            } else if arg.hasPrefix("-") {
+                fputs("maclinq-mac: unknown option '\(arg)'\n", stderr)
+                printUsageAndExit()
+            } else {
+                positional.append(arg)
+            }
+        }
+
+        index += 1
+    }
+
+    if positional.count > 2 {
+        fputs("maclinq-mac: expected at most two positional arguments (host and port)\n", stderr)
         printUsageAndExit()
     }
 
-    let host = args.first ?? "192.168.1.19"
+    let host = positional.first ?? "192.168.1.19"
     if host.isEmpty {
+        fputs("maclinq-mac: host must not be empty\n", stderr)
         printUsageAndExit()
     }
 
-    guard args.count < 2 || UInt16(args[1]) != nil else {
-        fputs("maclinq-mac: invalid port '\(args[1])'; expected an integer in the range 1-65535\n", stderr)
+    if positional.count == 2, parsePort(positional[1]) == nil {
+        fputs("maclinq-mac: invalid port '\(positional[1])'; expected an integer in the range 1-65535\n", stderr)
         printUsageAndExit()
     }
 
-    return (host, UInt16(args.dropFirst().first ?? "7680") ?? 7680)
+    return AppConfig(
+        host: host,
+        port: parsePort(positional.dropFirst().first ?? "7680") ?? 7680,
+        autoOn: autoOn || fixturePath != nil,
+        fixturePath: fixturePath
+    )
 }
 
 private func installSignalHandlers(app: MaclinqApp) {
@@ -272,10 +443,10 @@ private func installSignalHandlers(app: MaclinqApp) {
     _ = [sigintSource, sigtermSource]
 }
 
-let (host, port) = parseArguments()
-let app = MaclinqApp(host: host, port: port)
+let config = parseArguments()
 
 do {
+    let app = try MaclinqApp(config: config)
     installSignalHandlers(app: app)
     try app.start()
     dispatchMain()

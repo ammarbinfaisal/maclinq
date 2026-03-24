@@ -4,7 +4,7 @@
 #include <stdint.h>
 
 /*
- * Open /dev/uinput and create a virtual keyboard device.
+ * Open /dev/uinput and create a virtual keyboard + mouse device.
  * Returns the file descriptor on success, or -1 on error.
  */
 int uinput_create(void);
@@ -15,7 +15,7 @@ int uinput_create(void);
  *   keycode - Linux key code (e.g. KEY_A = 30)
  *   value   - 1 for press, 0 for release
  */
-void uinput_send_key(int fd, uint16_t keycode, int value);
+int uinput_send_key(int fd, uint16_t keycode, int value);
 
 /*
  * Compare old and new modifier bitmasks and inject the appropriate
@@ -25,7 +25,26 @@ void uinput_send_key(int fd, uint16_t keycode, int value);
  *   old_mods - previous modifier state
  *   new_mods - new modifier state
  */
-void uinput_send_modifier_diff(int fd, uint8_t old_mods, uint8_t new_mods);
+int uinput_send_modifier_diff(int fd, uint8_t old_mods, uint8_t new_mods);
+
+/*
+ * Inject relative pointer movement.
+ */
+int uinput_send_relative_move(int fd, int16_t dx, int16_t dy);
+
+/*
+ * Inject a mouse button press or release.
+ *   button - protocol button constant (left/right/middle)
+ *   value  - 1 for press, 0 for release
+ */
+int uinput_send_button(int fd, uint8_t button, int value);
+
+/*
+ * Inject relative wheel movement.
+ *   dx - horizontal wheel delta
+ *   dy - vertical wheel delta
+ */
+int uinput_send_scroll(int fd, int16_t dx, int16_t dy);
 
 /*
  * Destroy the virtual device and close the file descriptor.

@@ -1,0 +1,9 @@
+# Keyboard: macOS keycode 0x08 is C, which maps to Linux KEY_C (46).
+key_down 0x08 0
+key_up 0x08 0
+
+# Pointer actions.
+mouse_down left
+mouse_move 12 -8
+mouse_up left
+scroll 0 -1

@@ -13,6 +13,10 @@
 #define PKT_FLAGS_CHANGED 0x03
 #define PKT_HEARTBEAT     0x10
 #define PKT_DISCONNECT    0x11
+#define PKT_MOUSE_MOVE    0x20
+#define PKT_MOUSE_DOWN    0x21
+#define PKT_MOUSE_UP      0x22
+#define PKT_SCROLL        0x23
 
 // Modifier bits
 #define MOD_LCTRL   0x01
@@ -23,6 +27,10 @@
 #define MOD_RSHIFT  0x20
 #define MOD_RALT    0x40
 #define MOD_RMETA   0x80
+
+#define MOUSE_BUTTON_LEFT   0x01
+#define MOUSE_BUTTON_RIGHT  0x02
+#define MOUSE_BUTTON_MIDDLE 0x03
 
 // Handshake packet (6 bytes)
 struct __attribute__((packed)) handshake_pkt {
@@ -53,7 +61,28 @@ struct key_event {
     uint32_t timestamp_ms;
 };
 
+struct mouse_move_event {
+    int16_t dx;
+    int16_t dy;
+};
+
+struct mouse_button_event {
+    uint8_t type;
+    uint8_t button;
+};
+
+struct mouse_scroll_event {
+    int16_t dx;
+    int16_t dy;
+};
+
 int protocol_parse_event(const uint8_t *buf, struct key_event *evt);
+int protocol_parse_mouse_move(const uint8_t *buf, struct mouse_move_event *evt);
+int protocol_parse_mouse_button(const uint8_t *buf, struct mouse_button_event *evt);
+int protocol_parse_mouse_scroll(const uint8_t *buf, struct mouse_scroll_event *evt);
 int protocol_is_control(uint8_t type);
+int protocol_is_key_event(uint8_t type);
+int protocol_is_mouse_event(uint8_t type);
+int protocol_is_known_mouse_button(uint8_t button);
 
 #endif
