@@ -33,10 +33,10 @@ static void write_event(int fd, uint16_t type, uint16_t code, int32_t value)
     ev.value = value;
     written = write(fd, &ev, sizeof(ev));
     if (written < 0) {
-        fprintf(stderr, "keyb-linux: failed to write uinput event type=%u code=%u value=%d: %s\n",
+        fprintf(stderr, "maclinq-linux: failed to write uinput event type=%u code=%u value=%d: %s\n",
                 type, code, value, strerror(errno));
     } else if ((size_t)written != sizeof(ev)) {
-        fprintf(stderr, "keyb-linux: short write to uinput device: wrote %zd of %zu bytes\n",
+        fprintf(stderr, "maclinq-linux: short write to uinput device: wrote %zd of %zu bytes\n",
                 written, sizeof(ev));
     }
 }
@@ -50,7 +50,7 @@ int uinput_create(void)
     fd = open("/dev/uinput", O_WRONLY | O_NONBLOCK);
     if (fd < 0) {
         fprintf(stderr,
-                "keyb-linux: failed to open /dev/uinput: %s. "
+                "maclinq-linux: failed to open /dev/uinput: %s. "
                 "Ensure the uinput module is loaded and run with sufficient privileges.\n",
                 strerror(errno));
         return -1;
@@ -81,7 +81,7 @@ int uinput_create(void)
     usetup.id.vendor  = 0x1234;
     usetup.id.product = 0x5678;
     usetup.id.version = 1;
-    strncpy(usetup.name, "keyb-virtual-keyboard", UINPUT_MAX_NAME_SIZE - 1);
+    strncpy(usetup.name, "maclinq-virtual-keyboard", UINPUT_MAX_NAME_SIZE - 1);
 
     if (ioctl(fd, UI_DEV_SETUP, &usetup) < 0) {
         perror("UI_DEV_SETUP");
@@ -103,11 +103,11 @@ int uinput_create(void)
 void uinput_send_key(int fd, uint16_t keycode, int value)
 {
     if (fd < 0) {
-        fputs("keyb-linux: refusing to inject key event because uinput is not initialized\n", stderr);
+        fputs("maclinq-linux: refusing to inject key event because uinput is not initialized\n", stderr);
         return;
     }
     if (keycode == 0) {
-        fputs("keyb-linux: refusing to inject key event with keycode 0\n", stderr);
+        fputs("maclinq-linux: refusing to inject key event with keycode 0\n", stderr);
         return;
     }
 
@@ -123,7 +123,7 @@ void uinput_send_modifier_diff(int fd, uint8_t old_mods, uint8_t new_mods)
     if (changed == 0)
         return;
     if (fd < 0) {
-        fputs("keyb-linux: refusing to inject modifier change because uinput is not initialized\n", stderr);
+        fputs("maclinq-linux: refusing to inject modifier change because uinput is not initialized\n", stderr);
         return;
     }
 

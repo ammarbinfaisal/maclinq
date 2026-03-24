@@ -3,9 +3,9 @@
 
 #include <stdint.h>
 
-#define KEYB_MAGIC       0x4B455942
-#define KEYB_VERSION     0x01
-#define KEYB_PORT        7680
+#define MACLINQ_MAGIC       0x4D434C51
+#define MACLINQ_VERSION     0x01
+#define MACLINQ_PORT        7680
 
 // Packet types
 #define PKT_KEY_DOWN      0x01

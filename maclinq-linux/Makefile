@@ -1,6 +1,6 @@
 CC      = gcc
 CFLAGS  = -Wall -Wextra -O2
-TARGET  = keyb-receiver
+TARGET  = maclinq-receiver
 SRCS    = main.c uinput_device.c protocol.c server.c
 OBJS    = $(SRCS:.c=.o)
 TEST_TARGET = protocol-test

@@ -48,6 +48,6 @@ int main(void)
         return 1;
     }
 
-    puts("keyb-linux: protocol tests passed");
+    puts("maclinq-linux: protocol tests passed");
     return 0;
 }

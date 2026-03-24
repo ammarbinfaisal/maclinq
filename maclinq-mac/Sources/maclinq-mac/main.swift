@@ -1,7 +1,7 @@
 import CoreGraphics
 import Foundation
 
-final class KeybApp {
+final class MaclinqApp {
     private let host: String
     private let port: UInt16
     private let capture = KeyCapture()
@@ -22,8 +22,8 @@ final class KeybApp {
 
     func start() throws {
         try toggleSocket.start()
-        print("keyb-mac: ready; target is \(host):\(port)")
-        print("keyb-mac: use Karabiner or scripts/keyb-toggle.sh to toggle forwarding")
+        print("maclinq-mac: ready; target is \(host):\(port)")
+        print("maclinq-mac: use Karabiner or scripts/maclinq-toggle.sh to toggle forwarding")
     }
 
     func shutdown(reason: String, exitCode: Int32 = 0) {
@@ -41,7 +41,7 @@ final class KeybApp {
             return
         }
 
-        print("keyb-mac: shutting down (\(reason))")
+        print("maclinq-mac: shutting down (\(reason))")
         capture.stop()
         sender?.disconnect()
         sender = nil
@@ -94,7 +94,7 @@ final class KeybApp {
         }
 
         guard shouldStart else {
-            print("keyb-mac: activate request ignored because forwarding is already active or in progress")
+            print("maclinq-mac: activate request ignored because forwarding is already active or in progress")
             return
         }
 
@@ -106,7 +106,7 @@ final class KeybApp {
         }
         self.sender = sender
 
-        print("keyb-mac: connecting to \(host):\(port)")
+        print("maclinq-mac: connecting to \(host):\(port)")
         sender.connect(host: host, port: port) { [weak self, weak sender] error in
             DispatchQueue.main.async {
                 guard let self else { return }
@@ -121,7 +121,7 @@ final class KeybApp {
                         self.desiredActive = false
                     }
                     self.sender = nil
-                    fputs("keyb-mac: failed to activate forwarding: \(error.localizedDescription)\n", stderr)
+                    fputs("maclinq-mac: failed to activate forwarding: \(error.localizedDescription)\n", stderr)
                     return
                 }
 
@@ -135,14 +135,14 @@ final class KeybApp {
                     }
                     sender?.disconnect()
                     self.sender = nil
-                    fputs("keyb-mac: transport connected, but keyboard capture could not start: \(error.localizedDescription)\n", stderr)
+                    fputs("maclinq-mac: transport connected, but keyboard capture could not start: \(error.localizedDescription)\n", stderr)
                     return
                 }
 
                 self.withLockedState {
                     self.isActive = true
                 }
-                print("keyb-mac: active")
+                print("maclinq-mac: active")
             }
         }
     }
@@ -156,11 +156,11 @@ final class KeybApp {
         }
 
         guard didChange else {
-            print("keyb-mac: deactivate request ignored because forwarding is already inactive")
+            print("maclinq-mac: deactivate request ignored because forwarding is already inactive")
             return
         }
 
-        print("keyb-mac: deactivating (\(reason))")
+        print("maclinq-mac: deactivating (\(reason))")
         capture.stop()
         sender?.disconnect()
         sender = nil
@@ -178,7 +178,7 @@ final class KeybApp {
             return
         }
 
-        fputs("keyb-mac: remote transport dropped; forwarding has been disabled: \(message)\n", stderr)
+        fputs("maclinq-mac: remote transport dropped; forwarding has been disabled: \(message)\n", stderr)
         capture.stop()
         sender = nil
     }
@@ -196,12 +196,12 @@ final class KeybApp {
             sender.sendKeyEvent(type: type, keycode: 0, modifiers: modifiers, timestampMs: timestamp)
         case 0x01, 0x02:
             guard let mappedKeyCode = KeyMapper.mapKeyCode(keyCode) else {
-                fputs("keyb-mac: no Linux evdev mapping for macOS keycode \(keyCode); event dropped\n", stderr)
+                fputs("maclinq-mac: no Linux evdev mapping for macOS keycode \(keyCode); event dropped\n", stderr)
                 return
             }
             sender.sendKeyEvent(type: type, keycode: mappedKeyCode, modifiers: modifiers, timestampMs: timestamp)
         default:
-            fputs("keyb-mac: unexpected capture event type 0x\(String(format: "%02X", type)); event dropped\n", stderr)
+            fputs("maclinq-mac: unexpected capture event type 0x\(String(format: "%02X", type)); event dropped\n", stderr)
         }
     }
 
@@ -228,7 +228,7 @@ final class KeybApp {
 }
 
 private func printUsageAndExit() -> Never {
-    let program = (CommandLine.arguments.first as NSString?)?.lastPathComponent ?? "keyb-mac"
+    let program = (CommandLine.arguments.first as NSString?)?.lastPathComponent ?? "maclinq-mac"
     fputs("Usage: \(program) [host] [port]\n", stderr)
     fputs("Defaults: host=192.168.1.19 port=7680\n", stderr)
     Foundation.exit(2)
@@ -246,14 +246,14 @@ private func parseArguments() -> (String, UInt16) {
     }
 
     guard args.count < 2 || UInt16(args[1]) != nil else {
-        fputs("keyb-mac: invalid port '\(args[1])'; expected an integer in the range 1-65535\n", stderr)
+        fputs("maclinq-mac: invalid port '\(args[1])'; expected an integer in the range 1-65535\n", stderr)
         printUsageAndExit()
     }
 
     return (host, UInt16(args.dropFirst().first ?? "7680") ?? 7680)
 }
 
-private func installSignalHandlers(app: KeybApp) {
+private func installSignalHandlers(app: MaclinqApp) {
     signal(SIGINT, SIG_IGN)
     signal(SIGTERM, SIG_IGN)
 
@@ -273,13 +273,13 @@ private func installSignalHandlers(app: KeybApp) {
 }
 
 let (host, port) = parseArguments()
-let app = KeybApp(host: host, port: port)
+let app = MaclinqApp(host: host, port: port)
 
 do {
     installSignalHandlers(app: app)
     try app.start()
     dispatchMain()
 } catch {
-    fputs("keyb-mac: startup failed: \(error.localizedDescription)\n", stderr)
+    fputs("maclinq-mac: startup failed: \(error.localizedDescription)\n", stderr)
     Foundation.exit(1)
 }

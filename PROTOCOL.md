@@ -1,8 +1,8 @@
-# keyb Binary Protocol Specification v1
+# Maclinq Binary Protocol Specification v1
 
 ## Overview
 
-keyb uses a simple binary protocol over TCP for streaming keyboard events
+Maclinq uses a simple binary protocol over TCP for streaming keyboard events
 from a Mac sender to a Linux receiver. Both sides must implement this
 protocol identically to ensure interoperability.
 
@@ -22,7 +22,7 @@ responds with an acknowledgment. No further handshake is needed.
 
 | Offset | Size | Field         | Value / Description            |
 |--------|------|---------------|--------------------------------|
-| 0      | 4    | magic         | `0x4B455942` ("KEYB")          |
+| 0      | 4    | magic         | `0x4D434C51` ("MCLQ")          |
 | 4      | 1    | version       | `0x01`                         |
 | 5      | 1    | reserved      | `0x00`                         |
 
@@ -32,7 +32,7 @@ Total: **6 bytes**
 
 | Offset | Size | Field         | Value / Description            |
 |--------|------|---------------|--------------------------------|
-| 0      | 4    | magic         | `0x4B455942` ("KEYB")          |
+| 0      | 4    | magic         | `0x4D434C51` ("MCLQ")          |
 | 4      | 1    | version       | `0x01`                         |
 | 5      | 1    | status        | `0x00` = OK, `0x01` = rejected |
 
@@ -92,7 +92,7 @@ All multi-byte integers use **network byte order** (big-endian).
 ## Toggle Protocol (Mac-local, Unix Socket)
 
 The Karabiner toggle sends a single byte over a Unix domain socket at
-`/tmp/keyb.sock`:
+`/tmp/maclinq.sock`:
 
 | Value  | Meaning |
 |--------|---------|

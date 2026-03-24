@@ -1,13 +1,13 @@
 # Swift build artifacts
-keyb-mac/.build/
-keyb-mac/.swiftpm/
-keyb-mac/Package.resolved
+maclinq-mac/.build/
+maclinq-mac/.swiftpm/
+maclinq-mac/Package.resolved
 
 # C build artifacts
-keyb-linux/keyb-receiver
-keyb-linux/protocol-test
-keyb-linux/*.o
-keyb-linux/*.d
+maclinq-linux/maclinq-receiver
+maclinq-linux/protocol-test
+maclinq-linux/*.o
+maclinq-linux/*.d
 
 # macOS
 .DS_Store
@@ -18,4 +18,4 @@ keyb-linux/*.d
 .idea/
 
 # Runtime
-/tmp/keyb.sock
+/tmp/maclinq.sock

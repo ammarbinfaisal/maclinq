@@ -56,14 +56,14 @@ int main(int argc, char **argv)
     int listen_fd = -1;
     int client_fd = -1;
     int uinput_fd = -1;
-    uint16_t port = KEYB_PORT;
+    uint16_t port = MACLINQ_PORT;
     uint8_t current_mods = 0;
 
     while ((opt = getopt(argc, argv, "hp:")) != -1) {
         switch (opt) {
         case 'p':
             if (parse_port(optarg, &port) != 0) {
-                fprintf(stderr, "keyb-linux: invalid port '%s'\n", optarg);
+                fprintf(stderr, "maclinq-linux: invalid port '%s'\n", optarg);
                 print_usage(argv[0]);
                 return 2;
             }
@@ -121,17 +121,17 @@ int main(int argc, char **argv)
                 if (errno == EINTR) {
                     continue;
                 }
-                fprintf(stderr, "keyb-linux: poll failed: %s\n", strerror(errno));
+                fprintf(stderr, "maclinq-linux: poll failed: %s\n", strerror(errno));
                 break;
             }
 
             if (poll_result == 0) {
-                fputs("keyb-linux: client timed out after 5000ms without receiving a heartbeat or event\n", stderr);
+                fputs("maclinq-linux: client timed out after 5000ms without receiving a heartbeat or event\n", stderr);
                 break;
             }
 
             if ((pfd.revents & (POLLERR | POLLHUP | POLLNVAL)) != 0) {
-                fprintf(stderr, "keyb-linux: client socket closed or errored (revents=0x%X)\n", pfd.revents);
+                fprintf(stderr, "maclinq-linux: client socket closed or errored (revents=0x%X)\n", pfd.revents);
                 break;
             }
 
@@ -144,15 +144,15 @@ int main(int argc, char **argv)
                     continue;
                 }
                 if (buf[0] == PKT_DISCONNECT) {
-                    puts("keyb-linux: client requested disconnect");
+                    puts("maclinq-linux: client requested disconnect");
                     break;
                 }
-                fprintf(stderr, "keyb-linux: received unknown control packet type 0x%02X\n", buf[0]);
+                fprintf(stderr, "maclinq-linux: received unknown control packet type 0x%02X\n", buf[0]);
                 continue;
             }
 
             if (protocol_parse_event(buf, &evt) != 0) {
-                fputs("keyb-linux: failed to parse key event packet\n", stderr);
+                fputs("maclinq-linux: failed to parse key event packet\n", stderr);
                 break;
             }
 
@@ -168,7 +168,7 @@ int main(int argc, char **argv)
                 current_mods = evt.modifiers;
                 break;
             default:
-                fprintf(stderr, "keyb-linux: unknown event packet type 0x%02X\n", evt.type);
+                fprintf(stderr, "maclinq-linux: unknown event packet type 0x%02X\n", evt.type);
                 break;
             }
         }
@@ -191,6 +191,6 @@ int main(int argc, char **argv)
     }
     uinput_destroy(uinput_fd);
 
-    puts("keyb-linux: shutdown complete");
+    puts("maclinq-linux: shutdown complete");
     return 0;
 }

@@ -1,11 +1,11 @@
 #!/bin/bash
-# keyb-toggle.sh — CLI toggle for keyb daemon
-# Usage: keyb-toggle.sh [on|off|toggle|status]
+# maclinq-toggle.sh — CLI toggle for maclinq daemon
+# Usage: maclinq-toggle.sh [on|off|toggle|status]
 
-SOCK="/tmp/keyb.sock"
+SOCK="/tmp/maclinq.sock"
 
 if [ ! -S "$SOCK" ]; then
-    echo "keyb: daemon not running (no socket at $SOCK)"
+    echo "maclinq: daemon not running (no socket at $SOCK)"
     exit 1
 fi
 
@@ -23,9 +23,9 @@ case "${1:-toggle}" in
         # Send query byte, read response
         RESP=$(echo -ne "\x04" | nc -U "$SOCK" | xxd -p)
         if [ "$RESP" = "01" ]; then
-            echo "keyb: active"
+            echo "maclinq: active"
         else
-            echo "keyb: inactive"
+            echo "maclinq: inactive"
         fi
         ;;
     *)

@@ -1,8 +1,8 @@
 {
-  "title": "keyb - Remote Keyboard Toggle",
+  "title": "Maclinq - Remote Keyboard Toggle",
   "rules": [
     {
-      "description": "Cmd+F12: Toggle keyb (send keystrokes to Linux)",
+      "description": "Cmd+F12: Toggle maclinq (send keystrokes to Linux)",
       "manipulators": [
         {
           "type": "basic",
@@ -15,14 +15,14 @@
           },
           "to": [
             {
-              "shell_command": "/bin/bash -c 'echo -ne \"\\x01\" | /usr/bin/nc -U /tmp/keyb.sock'"
+              "shell_command": "/bin/bash -c 'echo -ne \"\\x01\" | /usr/bin/nc -U /tmp/maclinq.sock'"
             }
           ]
         }
       ]
     },
     {
-      "description": "Cmd+Shift+F12: Force OFF keyb",
+      "description": "Cmd+Shift+F12: Force OFF maclinq",
       "manipulators": [
         {
           "type": "basic",
@@ -35,7 +35,7 @@
           },
           "to": [
             {
-              "shell_command": "/bin/bash -c 'echo -ne \"\\x03\" | /usr/bin/nc -U /tmp/keyb.sock'"
+              "shell_command": "/bin/bash -c 'echo -ne \"\\x03\" | /usr/bin/nc -U /tmp/maclinq.sock'"
             }
           ]
         }

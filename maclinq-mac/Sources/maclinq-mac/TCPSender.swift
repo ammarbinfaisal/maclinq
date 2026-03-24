@@ -3,7 +3,7 @@ import Network
 
 final class TCPSender {
     private var connection: NWConnection?
-    private let queue = DispatchQueue(label: "keyb.tcp", qos: .userInteractive)
+    private let queue = DispatchQueue(label: "maclinq.tcp", qos: .userInteractive)
     private var heartbeatTimer: DispatchSourceTimer?
     private var connectionStartTime: Date?
     private var connectCompletion: ((Error?) -> Void)?
@@ -76,7 +76,7 @@ final class TCPSender {
     }
 
     static func handshakePacket() -> Data {
-        Data([0x4B, 0x45, 0x59, 0x42, 0x01, 0x00])
+        Data([0x4D, 0x43, 0x4C, 0x51, 0x01, 0x00])
     }
 
     static func keyEventPacket(type: UInt8, keycode: UInt16, modifiers: UInt8, timestampMs: UInt32) -> Data {
@@ -105,7 +105,7 @@ final class TCPSender {
             performHandshake()
         case .waiting(let error):
             let message = "transport waiting: \(error.localizedDescription)"
-            fputs("keyb-mac: \(message)\n", stderr)
+            fputs("maclinq-mac: \(message)\n", stderr)
             if !didFinishConnect {
                 finishConnectIfNeeded(with: makeError(message))
                 notifyDisconnect(message)
@@ -156,7 +156,7 @@ final class TCPSender {
                 }
 
                 let bytes = [UInt8](data)
-                guard bytes[0] == 0x4B, bytes[1] == 0x45, bytes[2] == 0x59, bytes[3] == 0x42 else {
+                guard bytes[0] == 0x4D, bytes[1] == 0x43, bytes[2] == 0x4C, bytes[3] == 0x51 else {
                     let wrapped = self.makeError(
                         "Handshake response had invalid magic bytes: \(bytes.prefix(4).map { String(format: "%02X", $0) }.joined(separator: " "))"
                     )
@@ -263,6 +263,6 @@ final class TCPSender {
     }
 
     private func makeError(_ message: String) -> Error {
-        NSError(domain: "keyb-mac", code: -1, userInfo: [NSLocalizedDescriptionKey: message])
+        NSError(domain: "maclinq-mac", code: -1, userInfo: [NSLocalizedDescriptionKey: message])
     }
 }

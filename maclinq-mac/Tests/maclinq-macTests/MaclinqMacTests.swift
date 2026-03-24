@@ -1,10 +1,10 @@
 import CoreGraphics
 import XCTest
-@testable import keyb_mac
+@testable import maclinq_mac
 
-final class KeybMacTests: XCTestCase {
+final class MaclinqMacTests: XCTestCase {
     func testHandshakePacketLayout() {
-        XCTAssertEqual(Array(TCPSender.handshakePacket()), [0x4B, 0x45, 0x59, 0x42, 0x01, 0x00])
+        XCTAssertEqual(Array(TCPSender.handshakePacket()), [0x4D, 0x43, 0x4C, 0x51, 0x01, 0x00])
     }
 
     func testKeyEventPacketUsesBigEndianLayout() {

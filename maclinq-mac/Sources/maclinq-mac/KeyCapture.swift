@@ -14,7 +14,7 @@ final class KeyCapture {
     func start(callback: @escaping KeyEventCallback) throws {
         guard eventTap == nil else {
             throw NSError(
-                domain: "keyb-mac",
+                domain: "maclinq-mac",
                 code: 10,
                 userInfo: [NSLocalizedDescriptionKey: "keyboard capture is already active"]
             )
@@ -31,18 +31,18 @@ final class KeyCapture {
         guard let tap = CGEvent.tapCreate(
             tap: .cgSessionEventTap,
             place: .headInsertEventTap,
-            options: .listenOnly,
+            options: .defaultTap,
             eventsOfInterest: eventMask,
             callback: keyCaptureCallback,
             userInfo: selfPtr
         ) else {
             self.callback = nil
             throw NSError(
-                domain: "keyb-mac",
+                domain: "maclinq-mac",
                 code: 11,
                 userInfo: [
                     NSLocalizedDescriptionKey:
-                        "failed to create CGEventTap; grant Accessibility access to the terminal or app running keyb-mac in System Settings > Privacy & Security > Accessibility"
+                        "failed to create CGEventTap; grant Accessibility access to the terminal or app running maclinq-mac in System Settings > Privacy & Security > Accessibility"
                 ]
             )
         }
@@ -54,7 +54,7 @@ final class KeyCapture {
         CFRunLoopAddSource(CFRunLoopGetMain(), source, .commonModes)
         CGEvent.tapEnable(tap: tap, enable: true)
 
-        print("keyb-mac: keyboard capture started")
+        print("maclinq-mac: keyboard capture started")
     }
 
     /// Stop capturing keyboard events.
@@ -72,7 +72,7 @@ final class KeyCapture {
         eventTap = nil
         runLoopSource = nil
         callback = nil
-        print("keyb-mac: keyboard capture stopped")
+        print("maclinq-mac: keyboard capture stopped")
     }
 
     /// Called from the C callback; re-enables the tap if the system disabled it.
@@ -117,5 +117,10 @@ private func keyCaptureCallback(
     guard let userInfo = userInfo else { return Unmanaged.passUnretained(event) }
     let capture = Unmanaged<KeyCapture>.fromOpaque(userInfo).takeUnretainedValue()
     capture.handleEvent(proxy: proxy, type: type, event: event)
-    return Unmanaged.passUnretained(event)
+    switch type {
+    case .keyDown, .keyUp, .flagsChanged:
+        return nil
+    default:
+        return Unmanaged.passUnretained(event)
+    }
 }

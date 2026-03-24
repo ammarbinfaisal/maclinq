@@ -10,11 +10,11 @@ enum ToggleCommandResult {
 final class ToggleSocket {
     private let socketPath: String
     private let commandHandler: (UInt8) -> ToggleCommandResult
-    private let queue = DispatchQueue(label: "keyb.toggle-socket", qos: .userInitiated)
+    private let queue = DispatchQueue(label: "maclinq.toggle-socket", qos: .userInitiated)
     private var listenFD: Int32 = -1
     private var running = false
 
-    init(socketPath: String = "/tmp/keyb.sock", commandHandler: @escaping (UInt8) -> ToggleCommandResult) {
+    init(socketPath: String = "/tmp/maclinq.sock", commandHandler: @escaping (UInt8) -> ToggleCommandResult) {
         self.socketPath = socketPath
         self.commandHandler = commandHandler
     }
@@ -84,7 +84,7 @@ final class ToggleSocket {
         queue.async { [weak self] in
             self?.acceptLoop()
         }
-        print("keyb-mac: toggle socket listening at \(socketPath)")
+        print("maclinq-mac: toggle socket listening at \(socketPath)")
     }
 
     func stop() {
@@ -101,9 +101,9 @@ final class ToggleSocket {
         }
 
         if unlink(socketPath) != 0 && errno != ENOENT {
-            fputs("keyb-mac: failed to remove toggle socket \(socketPath): \(String(cString: strerror(errno)))\n", stderr)
+            fputs("maclinq-mac: failed to remove toggle socket \(socketPath): \(String(cString: strerror(errno)))\n", stderr)
         } else {
-            print("keyb-mac: toggle socket stopped")
+            print("maclinq-mac: toggle socket stopped")
         }
     }
 
@@ -118,14 +118,14 @@ final class ToggleSocket {
                     continue
                 }
 
-                fputs("keyb-mac: toggle socket accept failed: \(String(cString: strerror(errno)))\n", stderr)
+                fputs("maclinq-mac: toggle socket accept failed: \(String(cString: strerror(errno)))\n", stderr)
                 continue
             }
 
             do {
                 try setNoSigPipe(clientFD)
             } catch {
-                fputs("keyb-mac: failed to configure client toggle socket: \(error.localizedDescription)\n", stderr)
+                fputs("maclinq-mac: failed to configure client toggle socket: \(error.localizedDescription)\n", stderr)
             }
 
             handleClient(clientFD)
@@ -137,11 +137,11 @@ final class ToggleSocket {
         var command: UInt8 = 0
         let bytesRead = read(clientFD, &command, 1)
         if bytesRead < 0 {
-            fputs("keyb-mac: failed to read toggle command: \(String(cString: strerror(errno)))\n", stderr)
+            fputs("maclinq-mac: failed to read toggle command: \(String(cString: strerror(errno)))\n", stderr)
             return
         }
         guard bytesRead == 1 else {
-            fputs("keyb-mac: toggle client disconnected before sending a command byte\n", stderr)
+            fputs("maclinq-mac: toggle client disconnected before sending a command byte\n", stderr)
             return
         }
 
@@ -149,13 +149,13 @@ final class ToggleSocket {
         case .noResponse:
             return
         case .invalid:
-            fputs("keyb-mac: ignored unknown toggle command 0x\(String(format: "%02X", command))\n", stderr)
+            fputs("maclinq-mac: ignored unknown toggle command 0x\(String(format: "%02X", command))\n", stderr)
             return
         case .response(let response):
             var responseByte = response
             let bytesWritten = write(clientFD, &responseByte, 1)
             if bytesWritten < 0 && errno != EPIPE {
-                fputs("keyb-mac: failed to write toggle response: \(String(cString: strerror(errno)))\n", stderr)
+                fputs("maclinq-mac: failed to write toggle response: \(String(cString: strerror(errno)))\n", stderr)
             }
         }
     }
@@ -181,6 +181,6 @@ final class ToggleSocket {
     }
 
     private func makeError(_ message: String) -> NSError {
-        NSError(domain: "keyb-mac", code: Int(errno), userInfo: [NSLocalizedDescriptionKey: message])
+        NSError(domain: "maclinq-mac", code: Int(errno), userInfo: [NSLocalizedDescriptionKey: message])
     }
 }
