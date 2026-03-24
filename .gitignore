@@ -5,6 +5,7 @@ keyb-mac/Package.resolved
 
 # C build artifacts
 keyb-linux/keyb-receiver
+keyb-linux/protocol-test
 keyb-linux/*.o
 keyb-linux/*.d
 
