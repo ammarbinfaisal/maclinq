@@ -9,13 +9,30 @@ cp maclinq-toggle.json ~/.config/karabiner/assets/complex_modifications/
 ```
 
 2. Open Karabiner-Elements → Complex Modifications → Add Rule
-3. Enable "Cmd+F12: Toggle maclinq (send keystrokes to Linux)"
-4. Optionally enable "Cmd+Shift+F12: Force OFF maclinq"
+3. Enable "F8: Toggle maclinq (send input to the remote endpoint)"
+4. Optionally enable "Shift+F8: Force OFF maclinq"
 
 ## Usage
 
-- **Cmd+F12** — Toggle keyboard forwarding on/off
-- **Cmd+Shift+F12** — Emergency force-off (always disables forwarding)
+- **F8** — Toggle forwarding on/off
+- **Shift+F8** — Emergency force-off (always disables forwarding)
+
+This default is intentional for Touch Bar Macs or setups where the function
+row is already exposed through Karabiner. It avoids depending on `Cmd+F12`.
+
+## Customizing the hotkey
+
+If `F8` conflicts with your setup:
+
+1. Open `karabiner/maclinq-toggle.json`
+2. Change the `from.key_code` value in both manipulators
+3. Change the `mandatory` modifiers if you want a modified shortcut instead
+4. Re-copy the file into Karabiner's `complex_modifications` directory
+
+Examples:
+- plain `f9`
+- `right_command` + `f9`
+- `right_option` + `f8`
 
 ## CLI alternative
 
