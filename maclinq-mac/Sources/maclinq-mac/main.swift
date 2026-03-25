@@ -8,6 +8,10 @@ struct AppConfig {
     let fixturePath: String?
 }
 
+private enum ToggleHotkey {
+    static let keyCode = CGKeyCode(0x64) // F8 on macOS virtual keycodes
+}
+
 final class MaclinqApp {
     private let config: AppConfig
     private let keyCapture = KeyCapture()
@@ -287,6 +291,11 @@ final class MaclinqApp {
 
     private func forwardCapturedEvent(type: UInt8, keyCode: CGKeyCode, flags: CGEventFlags, sender: TCPSender?) {
         guard currentStatusByte() == 0x01, let sender else {
+            return
+        }
+
+        // Never forward the local toggle key to the remote side.
+        if keyCode == ToggleHotkey.keyCode, type == 0x01 || type == 0x02 {
             return
         }
 
