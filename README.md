@@ -86,44 +86,57 @@ This produces `maclinq-receiver`.
 
 ## Setup
 
-### 1. Start the Linux receiver
+### 1. Choose host and port
+
+Pick:
+- the target host or IP address
+- a TCP port you want both sides to use
+
+Example shell variables:
+
+```bash
+TARGET_HOST="your-linux-host-or-ip"
+TARGET_PORT="your-chosen-port"
+```
+
+Maclinq does not assume network defaults. You must provide the same port on
+both endpoints, and the Mac sender must be told which host to connect to.
+
+### 2. Start the Linux receiver
 
 On the Linux machine:
 
 ```bash
 cd maclinq-linux
-sudo ./maclinq-receiver
+sudo ./maclinq-receiver --port "$TARGET_PORT"
 ```
 
 Useful options:
 
 ```bash
-sudo ./maclinq-receiver --port 7766
-sudo ./maclinq-receiver --event-log /tmp/maclinq-events.log
-sudo ./maclinq-receiver --once
+sudo ./maclinq-receiver --port "$TARGET_PORT" --event-log /tmp/maclinq-events.log
+sudo ./maclinq-receiver --port "$TARGET_PORT" --once
 ```
 
 Notes:
-- Default port is `7680`
+- `--port` is required
 - `--event-log` writes a line-oriented log of injected events, which is useful
   for debugging and automated verification
 - `--once` exits after a single client session ends
 
-### 2. Start the Mac sender
+### 3. Start the Mac sender
 
 On the Mac:
 
 ```bash
 cd maclinq-mac
-swift run maclinq-mac 192.168.1.10 7680
+swift run maclinq-mac "$TARGET_HOST" "$TARGET_PORT"
 ```
-
-If you omit arguments, the sender defaults to `192.168.1.19:7680`.
 
 Normal mode starts a local Unix socket at `/tmp/maclinq.sock` and waits for a
 toggle command.
 
-### 3. Grant Accessibility permission
+### 4. Grant Accessibility permission
 
 The process running `maclinq-mac` must be allowed under:
 
@@ -131,21 +144,32 @@ The process running `maclinq-mac` must be allowed under:
 
 Without this, macOS will refuse to create the keyboard and mouse event taps.
 
-### 4. Optional: install the Karabiner toggle
+Grant permission to the process that actually launches Maclinq:
+- `Terminal` if you run `swift run` from Terminal.app
+- `iTerm` if you run it from iTerm
+- a packaged Maclinq app if you later ship it as an `.app`
+
+You do not grant Accessibility access to the `.swift` source files or the repo
+directory.
+
+### 5. Optional: install the Karabiner toggle
 
 Follow [`karabiner/README-install.md`](karabiner/README-install.md).
 
 The bundled rule gives you:
-- `Cmd+F12` to toggle forwarding
-- `Cmd+Shift+F12` to force forwarding off
+- `F8` to toggle forwarding
+- `Shift+F8` to force forwarding off
 
 ## Usage
 
 ### Toggle forwarding from the Mac
 
 With Karabiner installed:
-- Press `Cmd+F12` to toggle on or off
-- Press `Cmd+Shift+F12` for an emergency off
+- Press `F8` to toggle on or off
+- Press `Shift+F8` for an emergency off
+
+If that does not fit your setup, customize the Karabiner rule as described in
+[`karabiner/README-install.md`](/Users/ammar/Documents/codes/keyb/karabiner/README-install.md).
 
 Without Karabiner:
 
@@ -169,7 +193,7 @@ Fixture mode is useful for scripted testing and packet-path verification.
 
 ```bash
 cd maclinq-mac
-swift run maclinq-mac --fixture ../scripts/fixtures/e2e.fixture 192.168.1.10 7766
+swift run maclinq-mac --fixture ../scripts/fixtures/e2e.fixture "$TARGET_HOST" "$TARGET_PORT"
 ```
 
 That mode:
@@ -189,9 +213,10 @@ The repository includes a scripted e2e harness that:
 Example:
 
 ```bash
-MACLINQ_E2E_REMOTE_HOST=192.168.1.10 \
+MACLINQ_E2E_REMOTE_HOST="$TARGET_HOST" \
 MACLINQ_E2E_REMOTE_USER=ammar \
 MACLINQ_E2E_REMOTE_PASS=weakp \
+MACLINQ_E2E_PORT="$TARGET_PORT" \
 ./scripts/test-maclinq-e2e.sh
 ```
 

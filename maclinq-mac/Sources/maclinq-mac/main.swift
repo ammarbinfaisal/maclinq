@@ -354,8 +354,8 @@ final class MaclinqApp {
 
 private func printUsageAndExit() -> Never {
     let program = (CommandLine.arguments.first as NSString?)?.lastPathComponent ?? "maclinq-mac"
-    fputs("Usage: \(program) [--auto-on] [--fixture PATH] [host] [port]\n", stderr)
-    fputs("Defaults: host=192.168.1.19 port=7680\n", stderr)
+    fputs("Usage: \(program) [--auto-on] [--fixture PATH] <host> <port>\n", stderr)
+    fputs("Both host and port are required; Maclinq does not assume network defaults.\n", stderr)
     fputs("--fixture replays scripted events and implies immediate activation\n", stderr)
     Foundation.exit(2)
 }
@@ -400,25 +400,25 @@ private func parseArguments() -> AppConfig {
         index += 1
     }
 
-    if positional.count > 2 {
-        fputs("maclinq-mac: expected at most two positional arguments (host and port)\n", stderr)
+    if positional.count != 2 {
+        fputs("maclinq-mac: expected exactly two positional arguments: <host> <port>\n", stderr)
         printUsageAndExit()
     }
 
-    let host = positional.first ?? "192.168.1.19"
+    let host = positional[0]
     if host.isEmpty {
         fputs("maclinq-mac: host must not be empty\n", stderr)
         printUsageAndExit()
     }
 
-    if positional.count == 2, parsePort(positional[1]) == nil {
+    if parsePort(positional[1]) == nil {
         fputs("maclinq-mac: invalid port '\(positional[1])'; expected an integer in the range 1-65535\n", stderr)
         printUsageAndExit()
     }
 
     return AppConfig(
         host: host,
-        port: parsePort(positional.dropFirst().first ?? "7680") ?? 7680,
+        port: parsePort(positional[1]) ?? 0,
         autoOn: autoOn || fixturePath != nil,
         fixturePath: fixturePath
     )

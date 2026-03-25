@@ -9,7 +9,7 @@ this protocol identically to ensure interoperability.
 ## Connection
 
 - Transport: TCP
-- Default port: **7680** (`0x1E00`)
+- Port: operator-selected; both endpoints must use the same TCP port
 - No TLS by default (optional encryption layer planned)
 - Mac connects to Linux (Linux is the server)
 

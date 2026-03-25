@@ -5,7 +5,6 @@
 
 #define MACLINQ_MAGIC       0x4D434C51
 #define MACLINQ_VERSION     0x01
-#define MACLINQ_PORT        7680
 
 // Packet types
 #define PKT_KEY_DOWN      0x01

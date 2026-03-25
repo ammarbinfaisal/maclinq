@@ -30,12 +30,12 @@ static void handle_signal(int signo)
 static void print_usage(const char *argv0)
 {
     fprintf(stderr,
-            "Usage: %s [-p port] [--event-log path] [--once]\n"
-            "  -p, --port PORT       Listen on PORT (default: %u)\n"
+            "Usage: %s --port PORT [--event-log path] [--once]\n"
+            "  -p, --port PORT       Listen on PORT\n"
             "      --event-log PATH  Append injected event summaries to PATH\n"
             "      --once            Exit after the first client session ends\n"
             "  -h, --help            Show this help text\n",
-            argv0, MACLINQ_PORT);
+            argv0);
 }
 
 static int parse_port(const char *text, uint16_t *out_port)
@@ -65,7 +65,7 @@ static int parse_arguments(int argc, char **argv, struct app_config *config)
         {0, 0, 0, 0}
     };
 
-    config->port = MACLINQ_PORT;
+    config->port = 0;
     config->event_log_path = NULL;
     config->once = 0;
 
@@ -93,6 +93,10 @@ static int parse_arguments(int argc, char **argv, struct app_config *config)
 
     if (optind != argc) {
         fprintf(stderr, "maclinq-linux: unexpected positional argument '%s'\n", argv[optind]);
+        return -1;
+    }
+    if (config->port == 0) {
+        fputs("maclinq-linux: missing required --port argument\n", stderr);
         return -1;
     }
 
