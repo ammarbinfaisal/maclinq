@@ -34,6 +34,7 @@ Out of scope in v1:
 - macOS 13 or newer
 - Swift 5.9 toolchain or newer
 - Accessibility permission for the app or terminal running `maclinq-mac`
+- Input Monitoring permission for the app or terminal running `maclinq-mac`
 - Karabiner-Elements if you want the hotkey toggle flow
 
 ### Linux
@@ -162,26 +163,31 @@ Without this, macOS will refuse to create the keyboard and mouse event taps.
 Grant permission to the process that actually launches Maclinq:
 - `Terminal` if you run `swift run` from Terminal.app
 - `iTerm` if you run it from iTerm
+- `Ghostty` if you run it from Ghostty
 - a packaged Maclinq app if you later ship it as an `.app`
 
 You do not grant Accessibility access to the `.swift` source files or the repo
 directory.
+
+In practice you should grant both:
+- `Accessibility`
+- `Input Monitoring`
 
 ### 5. Optional: install the Karabiner toggle
 
 Follow [README-install.md](/Users/ammar/Documents/codes/keyb/karabiner/README-install.md).
 
 The bundled rule gives you:
-- `F8` to toggle forwarding
-- `Shift+F8` to force forwarding off
+- `Shift+Cmd+Opt+0` to toggle forwarding
+- `Shift+Cmd+Opt+9` to force forwarding off
 
 ## Usage
 
 ### Toggle forwarding from the Mac
 
 With Karabiner installed:
-- Press `F8` to toggle on or off
-- Press `Shift+F8` for an emergency off
+- Press `Shift+Cmd+Opt+0` to toggle on or off
+- Press `Shift+Cmd+Opt+9` for an emergency off
 
 If that does not fit your setup, customize the Karabiner rule as described in
 [`karabiner/README-install.md`](/Users/ammar/Documents/codes/keyb/karabiner/README-install.md).
@@ -244,7 +250,8 @@ The script currently expects:
 
 ### macOS sender says capture could not start
 
-Check Accessibility permission first. That is the most common failure path.
+Check both Accessibility and Input Monitoring for the app that launched
+Maclinq. Then fully quit and relaunch that app before trying again.
 
 ### Linux receiver cannot open `/dev/uinput`
 

@@ -38,6 +38,7 @@ final class MaclinqApp {
 
     func start() throws {
         if fixturePlayback == nil {
+            try PermissionCheck.validateInteractiveCapturePermissions()
             try toggleSocket.start()
             print("maclinq-mac: ready; target is \(config.host):\(config.port)")
             print("maclinq-mac: use Karabiner or scripts/maclinq-toggle.sh to toggle forwarding")

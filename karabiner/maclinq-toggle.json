@@ -2,12 +2,16 @@
   "title": "Maclinq - Remote Keyboard Toggle",
   "rules": [
     {
-      "description": "F8: Toggle maclinq (send input to the remote endpoint)",
+      "description": "Shift+Cmd+Opt+0: Toggle maclinq (send input to the remote endpoint)",
       "manipulators": [
         {
           "type": "basic",
           "from": {
-            "key_code": "f8"
+            "key_code": "0",
+            "modifiers": {
+              "mandatory": ["shift", "command", "option"],
+              "optional": ["any"]
+            }
           },
           "to": [
             {
@@ -18,14 +22,14 @@
       ]
     },
     {
-      "description": "Shift+F8: Force OFF maclinq",
+      "description": "Shift+Cmd+Opt+9: Force OFF maclinq",
       "manipulators": [
         {
           "type": "basic",
           "from": {
-            "key_code": "f8",
+            "key_code": "9",
             "modifiers": {
-              "mandatory": ["shift"],
+              "mandatory": ["shift", "command", "option"],
               "optional": ["any"]
             }
           },
