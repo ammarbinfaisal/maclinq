@@ -5,6 +5,24 @@ local TCP connection. The Mac side captures keyboard, pointer movement,
 clicks, and scroll, then the Linux side injects those events through
 `/dev/uinput`.
 
+## Cross-Platform WIP
+
+This branch, `wip/multiplatform-flow-abstraction`, is a work-in-progress
+refactor to make Maclinq role- and platform-neutral instead of hardwiring the
+project to "Mac sender -> Linux receiver".
+
+The target shape is:
+- Linux to Mac
+- Mac to Linux
+- Android to Mac
+- Android to Linux
+
+The architectural notes for that work live in
+[`docs/MULTIPLATFORM-WIP.md`](docs/MULTIPLATFORM-WIP.md).
+
+This branch is for design and abstraction work, not for production stability.
+`main` remains the stable branch for the current Mac-to-Linux path.
+
 Current v1 scope:
 - Keyboard forwarding
 - Relative mouse movement
@@ -19,11 +37,12 @@ Out of scope in v1:
 
 ## Repository Layout
 
-- `maclinq-mac/`: Swift sender for macOS
-- `maclinq-linux/`: C receiver for Linux
+- `maclinq-mac/`: current macOS endpoint implementation
+- `maclinq-linux/`: current Linux endpoint implementation
 - `karabiner/`: Karabiner toggle rule for normal Mac usage
 - `scripts/maclinq-toggle.sh`: local toggle helper for the Mac sender
 - `scripts/test-maclinq-e2e.sh`: scripted end-to-end verification
+- `docs/`: architecture and work-in-progress notes
 - `PROTOCOL.md`: wire protocol
 
 ## Prerequisites
@@ -114,7 +133,7 @@ Without this, macOS will refuse to create the keyboard and mouse event taps.
 
 ### 4. Optional: install the Karabiner toggle
 
-Follow [README-install.md](/Users/ammar/Documents/codes/keyb/karabiner/README-install.md).
+Follow [`karabiner/README-install.md`](karabiner/README-install.md).
 
 The bundled rule gives you:
 - `Cmd+F12` to toggle forwarding
@@ -207,5 +226,5 @@ Use:
 
 ## Protocol
 
-See [PROTOCOL.md](/Users/ammar/Documents/codes/keyb/PROTOCOL.md) for the
+See [`PROTOCOL.md`](PROTOCOL.md) for the
 binary packet format.
