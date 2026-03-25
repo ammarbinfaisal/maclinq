@@ -23,6 +23,7 @@ Out of scope in v1:
 - `maclinq-linux/`: C receiver for Linux
 - `karabiner/`: Karabiner toggle rule for normal Mac usage
 - `scripts/maclinq-toggle.sh`: local toggle helper for the Mac sender
+- `scripts/kde-plasma6-apple-physical-keys.sh`: Apple-keyboard remap helper for KDE Plasma 6 on Linux
 - `scripts/test-maclinq-e2e.sh`: scripted end-to-end verification
 - `PROTOCOL.md`: wire protocol
 
@@ -41,6 +42,7 @@ Out of scope in v1:
 - A kernel with `uinput` available
 - Permission to open `/dev/uinput`
   In practice this usually means running the receiver with `sudo`
+- `hid_apple` if you want the Apple-keyboard physical remap helper on KDE Plasma 6
 
 ## Install And Build
 
@@ -116,6 +118,38 @@ swift run maclinq-mac "$TARGET_HOST" "$TARGET_PORT"
 
 Normal mode starts a local Unix socket at `/tmp/maclinq.sock` and waits for a
 toggle command.
+
+### 3a. Optional: make an Apple keyboard feel like a PC keyboard on KDE Plasma 6
+
+If your Linux target is KDE Plasma 6 on Ubuntu and you are using an Apple
+keyboard, you can remap the physical modifier row so common Linux shortcuts
+match the physical key positions:
+
+- physical `fn` acts as `Ctrl`
+- physical `ctrl` acts as `Fn`
+- physical `option` acts as `Meta/Super`
+- physical `command` acts as `Alt`
+
+Use:
+
+```bash
+sudo ./scripts/kde-plasma6-apple-physical-keys.sh apply
+```
+
+Status and rollback:
+
+```bash
+sudo ./scripts/kde-plasma6-apple-physical-keys.sh status
+sudo ./scripts/kde-plasma6-apple-physical-keys.sh restore
+```
+
+The script:
+- configures the `hid_apple` kernel driver for a persistent remap
+- tries to apply the remap to the running kernel immediately
+- can optionally configure Plasma 6 so `Meta` alone opens the launcher
+
+See `--help` on the script for runtime-only mode, config-file support, and
+Plasma-specific options.
 
 ### 4. Grant Accessibility permission
 
