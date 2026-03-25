@@ -19,6 +19,8 @@ The target shape is:
 
 The architectural notes for that work live in
 [`docs/MULTIPLATFORM-WIP.md`](docs/MULTIPLATFORM-WIP.md).
+The current protocol draft for that work lives in
+[`docs/PROTOCOL-V2-DRAFT.md`](docs/PROTOCOL-V2-DRAFT.md).
 
 This branch is for design and abstraction work, not for production stability.
 `main` remains the stable branch for the current Mac-to-Linux path.
@@ -253,3 +255,7 @@ Use:
 
 See [`PROTOCOL.md`](PROTOCOL.md) for the
 binary packet format.
+
+On this branch, also see [`docs/PROTOCOL-V2-DRAFT.md`](docs/PROTOCOL-V2-DRAFT.md)
+for the platform-neutral draft intended to replace the Linux-biased v1 wire
+format over time.

@@ -113,6 +113,9 @@ The likely path forward is:
    - optional feature flags for buttons, scrolling, text input, and gestures
 3. Add per-platform translation layers at the edges.
 
+The first draft of that protocol now lives in
+[`docs/PROTOCOL-V2-DRAFT.md`](docs/PROTOCOL-V2-DRAFT.md).
+
 ## Android Notes
 
 ### Termux
@@ -155,6 +158,10 @@ The first meaningful steps are:
 2. Separate native capture/inject code from session orchestration.
 3. Introduce a semantic event model that is not Linux-keycode-first.
 4. Keep the current v1 implementation working while v2 is designed.
+
+The next code milestone after this draft is to introduce a shared internal
+event model in both implementations so v1 platform code can be adapted behind
+that semantic layer before the transport is changed.
 
 ## Branch Intent
 
