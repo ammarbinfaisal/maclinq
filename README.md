@@ -181,6 +181,12 @@ The bundled rule gives you:
 - `Shift+Cmd+Opt+0` to toggle forwarding
 - `Shift+Cmd+Opt+9` to force forwarding off
 
+To install and enable the Karabiner rules automatically:
+
+```bash
+./scripts/install-karabiner-maclinq.sh
+```
+
 ## Usage
 
 ### Toggle forwarding from the Mac

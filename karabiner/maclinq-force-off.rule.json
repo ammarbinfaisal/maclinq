@@ -1,0 +1,20 @@
+{
+  "description": "Shift+Cmd+Opt+9: Force OFF maclinq",
+  "manipulators": [
+    {
+      "type": "basic",
+      "from": {
+        "key_code": "9",
+        "modifiers": {
+          "mandatory": ["shift", "command", "option"],
+          "optional": ["any"]
+        }
+      },
+      "to": [
+        {
+          "shell_command": "/bin/bash -c 'echo -ne \"\\x03\" | /usr/bin/nc -U /tmp/maclinq.sock'"
+        }
+      ]
+    }
+  ]
+}

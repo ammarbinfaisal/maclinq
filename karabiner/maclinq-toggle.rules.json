@@ -1,0 +1,42 @@
+[
+  {
+    "description": "Shift+Cmd+Opt+0: Toggle maclinq (send input to the remote endpoint)",
+    "manipulators": [
+      {
+        "type": "basic",
+        "from": {
+          "key_code": "0",
+          "modifiers": {
+            "mandatory": ["shift", "command", "option"],
+            "optional": ["any"]
+          }
+        },
+        "to": [
+          {
+            "shell_command": "/bin/bash -c 'echo -ne \"\\x01\" | /usr/bin/nc -U /tmp/maclinq.sock'"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "description": "Shift+Cmd+Opt+9: Force OFF maclinq",
+    "manipulators": [
+      {
+        "type": "basic",
+        "from": {
+          "key_code": "9",
+          "modifiers": {
+            "mandatory": ["shift", "command", "option"],
+            "optional": ["any"]
+          }
+        },
+        "to": [
+          {
+            "shell_command": "/bin/bash -c 'echo -ne \"\\x03\" | /usr/bin/nc -U /tmp/maclinq.sock'"
+          }
+        ]
+      }
+    ]
+  }
+]
