@@ -5,73 +5,75 @@ import Foundation
 /// Parameters: eventType (1=keyDown,2=keyUp,3=flagsChanged), keyCode, flags
 typealias KeyEventCallback = (UInt8, CGKeyCode, CGEventFlags) -> Void
 
+private final class KeyCaptureStartupState {
+    var error: Error?
+}
+
 final class KeyCapture {
+    private let stateLock = NSLock()
     private var eventTap: CFMachPort?
     private var runLoopSource: CFRunLoopSource?
+    private var captureRunLoop: CFRunLoop?
+    private var captureThread: Thread?
+    private var stopWaiter: DispatchSemaphore?
     private var callback: KeyEventCallback?
 
     /// Start capturing keyboard events, calling `callback` for each event.
     func start(callback: @escaping KeyEventCallback) throws {
-        guard eventTap == nil else {
-            throw NSError(
-                domain: "maclinq-mac",
-                code: 10,
-                userInfo: [NSLocalizedDescriptionKey: "keyboard capture is already active"]
-            )
-        }
-        self.callback = callback
+        let startupWaiter = DispatchSemaphore(value: 0)
+        let startupState = KeyCaptureStartupState()
 
-        let eventMask: CGEventMask =
-            (1 << CGEventType.keyDown.rawValue) |
-            (1 << CGEventType.keyUp.rawValue) |
-            (1 << CGEventType.flagsChanged.rawValue)
+        let thread = try withLockedState { () throws -> Thread in
+            guard captureThread == nil else {
+                throw NSError(
+                    domain: "maclinq-mac",
+                    code: 10,
+                    userInfo: [NSLocalizedDescriptionKey: "keyboard capture is already active"]
+                )
+            }
 
-        let selfPtr = Unmanaged.passUnretained(self).toOpaque()
+            self.callback = callback
 
-        guard let tap = CGEvent.tapCreate(
-            tap: .cghidEventTap,
-            place: .headInsertEventTap,
-            options: .defaultTap,
-            eventsOfInterest: eventMask,
-            callback: keyCaptureCallback,
-            userInfo: selfPtr
-        ) else {
-            self.callback = nil
-            throw NSError(
-                domain: "maclinq-mac",
-                code: 11,
-                userInfo: [
-                    NSLocalizedDescriptionKey:
-                        "failed to create CGEventTap; grant Accessibility access to the terminal or app running maclinq-mac in System Settings > Privacy & Security > Accessibility"
-                ]
-            )
+            let thread = Thread { [weak self] in
+                self?.runCaptureLoop(startupWaiter: startupWaiter, startupState: startupState)
+            }
+            thread.name = "maclinq.keyboard-capture"
+            captureThread = thread
+            return thread
         }
 
-        self.eventTap = tap
+        thread.start()
+        startupWaiter.wait()
 
-        let source = CFMachPortCreateRunLoopSource(kCFAllocatorDefault, tap, 0)
-        self.runLoopSource = source
-        CFRunLoopAddSource(CFRunLoopGetMain(), source, .commonModes)
-        CGEvent.tapEnable(tap: tap, enable: true)
+        if let error = startupState.error {
+            throw error
+        }
 
         print("maclinq-mac: keyboard capture started")
     }
 
     /// Stop capturing keyboard events.
     func stop() {
-        guard eventTap != nil else {
+        let stopWaiter: DispatchSemaphore? = withLockedState {
+            guard captureThread != nil else {
+                return nil
+            }
+            callback = nil
+            let waiter = DispatchSemaphore(value: 0)
+            self.stopWaiter = waiter
+            return waiter
+        }
+
+        guard let stopWaiter else {
             return
         }
 
-        if let tap = eventTap {
-            CGEvent.tapEnable(tap: tap, enable: false)
-            if let source = runLoopSource {
-                CFRunLoopRemoveSource(CFRunLoopGetMain(), source, .commonModes)
-            }
+        if let runLoop = withLockedState({ captureRunLoop }) {
+            CFRunLoopStop(runLoop)
+            CFRunLoopWakeUp(runLoop)
         }
-        eventTap = nil
-        runLoopSource = nil
-        callback = nil
+
+        stopWaiter.wait()
         print("maclinq-mac: keyboard capture stopped")
     }
 
@@ -103,6 +105,74 @@ final class KeyCapture {
         }
 
         callback(eventTypeCode, keyCode, flags)
+    }
+
+    private func runCaptureLoop(startupWaiter: DispatchSemaphore, startupState: KeyCaptureStartupState) {
+        let eventMask: CGEventMask =
+            (1 << CGEventType.keyDown.rawValue) |
+            (1 << CGEventType.keyUp.rawValue) |
+            (1 << CGEventType.flagsChanged.rawValue)
+
+        let selfPtr = Unmanaged.passUnretained(self).toOpaque()
+
+        guard let tap = CGEvent.tapCreate(
+            tap: .cghidEventTap,
+            place: .headInsertEventTap,
+            options: .defaultTap,
+            eventsOfInterest: eventMask,
+            callback: keyCaptureCallback,
+            userInfo: selfPtr
+        ) else {
+            withLockedState {
+                callback = nil
+                captureThread = nil
+            }
+            startupState.error = NSError(
+                domain: "maclinq-mac",
+                code: 11,
+                userInfo: [
+                    NSLocalizedDescriptionKey:
+                        "failed to create CGEventTap; grant Accessibility access to the terminal or app running maclinq-mac in System Settings > Privacy & Security > Accessibility"
+                ]
+            )
+            startupWaiter.signal()
+            return
+        }
+
+        let source = CFMachPortCreateRunLoopSource(kCFAllocatorDefault, tap, 0)
+        let runLoop = CFRunLoopGetCurrent()
+
+        withLockedState {
+            eventTap = tap
+            runLoopSource = source
+            captureRunLoop = runLoop
+        }
+
+        CFRunLoopAddSource(runLoop, source, .commonModes)
+        CGEvent.tapEnable(tap: tap, enable: true)
+        startupWaiter.signal()
+        CFRunLoopRun()
+
+        CGEvent.tapEnable(tap: tap, enable: false)
+        CFRunLoopRemoveSource(runLoop, source, .commonModes)
+
+        let waiter = withLockedState { () -> DispatchSemaphore? in
+            eventTap = nil
+            runLoopSource = nil
+            captureRunLoop = nil
+            captureThread = nil
+            let waiter = stopWaiter
+            stopWaiter = nil
+            return waiter
+        }
+        waiter?.signal()
+    }
+
+    @discardableResult
+    private func withLockedState<T>(_ body: () throws -> T) rethrows -> T {
+        stateLock.lock()
+        defer { stateLock.unlock() }
+        return try body()
     }
 }
 

@@ -1,0 +1,700 @@
+[2026-03-17 07:06:16.240] [info] [core_service] version 15.9.0
+[2026-03-17 07:06:16.263] [info] [core_service] signing_information team_id: G43BCU2T37
+[2026-03-17 07:06:16.278] [info] [core_service] Karabiner-Elements.app path: file:///Applications/Karabiner-Elements.app/
+[2026-03-17 07:06:16.292] [info] [core_service] task_policy_set is called.
+[2026-03-17 07:06:16.296] [info] [core_service] session_monitor_receiver is initialized
+[2026-03-17 07:06:16.308] [info] [core_service] receiver is initialized
+[2026-03-17 07:06:16.310] [info] [core_service] session_monitor_receiver: bound
+[2026-03-17 07:06:16.310] [info] [core_service] receiver: bound
+[2026-03-17 07:06:16.310] [info] [core_service] receiver: chown socket: 0
+[2026-03-17 07:06:17.164] [info] [core_service] current_console_user_id: 501
+[2026-03-17 07:06:17.165] [info] [core_service] receiver is terminated
+[2026-03-17 07:06:17.165] [info] [core_service] receiver is initialized
+[2026-03-17 07:06:17.167] [info] [core_service] console_user_server_client is started.
+[2026-03-17 07:06:17.167] [info] [core_service] receiver: bound
+[2026-03-17 07:06:17.167] [info] [core_service] receiver: chown socket: 501
+[2026-03-17 07:06:17.167] [error] [core_service] console_user_server_client connect_failed: No such file or directory
+[2026-03-17 07:06:17.723] [info] [core_service] `system_preferences` is updated.
+[2026-03-17 07:06:18.174] [info] [core_service] console_user_server_client is connected.
+[2026-03-17 07:06:18.193] [info] [core_service] device_grabber is started.
+[2026-03-17 07:06:18.249] [info] [core_service] event_tap_monitor initialized
+[2026-03-17 07:06:18.256] [info] [core_service] Load /Users/ammar/.config/karabiner/karabiner.json...
+[2026-03-17 07:06:18.256] [info] [core_service] core_configuration is updated.
+[2026-03-17 07:06:18.258] [info] [core_service] virtual_hid_device_service_client_ connected
+[2026-03-17 07:06:19.330] [warning] [core_service] virtual_hid_keyboard is not ready. Please wait for a while.
+[2026-03-17 07:06:19.337] [info] [core_service] caps lock is found on Apple Internal Keyboard / Trackpad
+[2026-03-17 07:06:38.286] [info] [core_service] caps lock is found on Karabiner DriverKit VirtualHIDKeyboard 1.8.0
+[2026-03-17 07:06:38.290] [info] [core_service] Karabiner DriverKit VirtualHIDKeyboard 1.8.0 (device_id:4294977053) hid queue value monitor is started (observed).
+[2026-03-17 07:06:38.308] [info] [core_service] virtual_hid_device_service_client_ virtual_hid_keyboard_ready_response: true
+[2026-03-17 07:06:38.310] [info] [core_service] Apple Internal Keyboard / Trackpad (device_id:4294969626) hid queue value monitor is started (grabbed).
+[2026-03-17 07:06:38.310] [info] [core_service] caps_lock_led_state_manager is started: Apple Internal Keyboard / Trackpad
+[2026-03-17 07:06:38.312] [info] [core_service] TouchBarUserDevice (device_id:4294970592) hid queue value monitor is started (grabbed).
+[2026-03-17 07:06:38.312] [info] [core_service] caps_lock_led_state_manager is started: TouchBarUserDevice
+[2026-03-17 07:08:32.621] [info] [core_service] Load /Users/ammar/.config/karabiner/karabiner.json...
+[2026-03-17 07:08:32.623] [info] [core_service] core_configuration is updated.
+[2026-03-17 07:08:59.110] [info] [core_service] `system_preferences` is updated.
+[2026-03-17 07:09:00.286] [error] [core_service] console_user_server_client error: Connection reset by peer
+[2026-03-17 07:09:00.286] [info] [core_service] console_user_server_client is closed.
+[2026-03-17 07:09:00.286] [info] [core_service] event_tap_monitor terminated
+[2026-03-17 07:09:00.300] [info] [core_service] device_grabber is stopped.
+[2026-03-17 07:09:00.494] [info] [core_service] console_user_server_client is connected.
+[2026-03-17 07:09:00.509] [info] [core_service] device_grabber is started.
+[2026-03-17 07:09:00.537] [info] [core_service] event_tap_monitor initialized
+[2026-03-17 07:09:00.545] [info] [core_service] Load /Users/ammar/.config/karabiner/karabiner.json...
+[2026-03-17 07:09:00.546] [info] [core_service] core_configuration is updated.
+[2026-03-17 07:09:00.549] [info] [core_service] virtual_hid_device_service_client_ connected
+[2026-03-17 07:09:01.601] [warning] [core_service] virtual_hid_keyboard is not ready. Please wait for a while.
+[2026-03-17 07:09:01.608] [info] [core_service] caps lock is found on Apple Internal Keyboard / Trackpad
+[2026-03-17 07:09:01.657] [info] [core_service] caps lock is found on Karabiner DriverKit VirtualHIDKeyboard 1.8.0
+[2026-03-17 07:09:01.659] [info] [core_service] Karabiner DriverKit VirtualHIDKeyboard 1.8.0 (device_id:4294977161) hid queue value monitor is started (observed).
+[2026-03-17 07:09:02.556] [info] [core_service] virtual_hid_device_service_client_ virtual_hid_keyboard_ready_response: true
+[2026-03-17 07:09:02.558] [info] [core_service] Apple Internal Keyboard / Trackpad (device_id:4294969626) hid queue value monitor is started (grabbed).
+[2026-03-17 07:09:02.558] [info] [core_service] caps_lock_led_state_manager is started: Apple Internal Keyboard / Trackpad
+[2026-03-17 07:09:02.565] [info] [core_service] TouchBarUserDevice (device_id:4294970592) hid queue value monitor is started (grabbed).
+[2026-03-17 07:09:02.565] [info] [core_service] caps_lock_led_state_manager is started: TouchBarUserDevice
+[2026-03-17 08:32:53.488] [info] [core_service] Aavante Bar 610 (device_id:4294982924) is terminated.
+[2026-03-17 08:59:59.619] [info] [core_service] version 15.9.0
+[2026-03-17 08:59:59.645] [info] [core_service] signing_information team_id: G43BCU2T37
+[2026-03-17 08:59:59.660] [info] [core_service] Karabiner-Elements.app path: file:///Applications/Karabiner-Elements.app/
+[2026-03-17 08:59:59.681] [info] [core_service] task_policy_set is called.
+[2026-03-17 08:59:59.682] [info] [core_service] session_monitor_receiver is initialized
+[2026-03-17 08:59:59.692] [info] [core_service] receiver is initialized
+[2026-03-17 08:59:59.694] [info] [core_service] receiver: bound
+[2026-03-17 08:59:59.694] [info] [core_service] receiver: chown socket: 0
+[2026-03-17 08:59:59.694] [info] [core_service] session_monitor_receiver: bound
+[2026-03-17 09:00:09.512] [info] [core_service] current_console_user_id: 501
+[2026-03-17 09:00:09.513] [info] [core_service] receiver is terminated
+[2026-03-17 09:00:09.514] [info] [core_service] receiver is initialized
+[2026-03-17 09:00:09.519] [info] [core_service] console_user_server_client is started.
+[2026-03-17 09:00:09.522] [info] [core_service] receiver: bound
+[2026-03-17 09:00:09.522] [info] [core_service] receiver: chown socket: 501
+[2026-03-17 09:00:09.522] [error] [core_service] console_user_server_client connect_failed: Connection refused
+[2026-03-17 09:00:10.525] [error] [core_service] console_user_server_client connect_failed: Connection refused
+[2026-03-17 09:00:11.531] [error] [core_service] console_user_server_client connect_failed: Connection refused
+[2026-03-17 09:00:12.533] [error] [core_service] console_user_server_client connect_failed: Connection refused
+[2026-03-17 09:00:12.740] [info] [core_service] `system_preferences` is updated.
+[2026-03-17 09:00:13.535] [info] [core_service] console_user_server_client is connected.
+[2026-03-17 09:00:13.594] [info] [core_service] device_grabber is started.
+[2026-03-17 09:00:13.645] [info] [core_service] event_tap_monitor initialized
+[2026-03-17 09:00:13.649] [info] [core_service] Load /Users/ammar/.config/karabiner/karabiner.json...
+[2026-03-17 09:00:13.649] [info] [core_service] core_configuration is updated.
+[2026-03-17 09:00:13.654] [info] [core_service] virtual_hid_device_service_client_ connected
+[2026-03-17 09:00:14.736] [warning] [core_service] virtual_hid_keyboard is not ready. Please wait for a while.
+[2026-03-17 09:00:14.744] [info] [core_service] caps lock is found on Apple Internal Keyboard / Trackpad
+[2026-03-17 09:00:14.795] [info] [core_service] caps lock is found on Karabiner DriverKit VirtualHIDKeyboard 1.8.0
+[2026-03-17 09:00:14.799] [info] [core_service] Karabiner DriverKit VirtualHIDKeyboard 1.8.0 (device_id:4294971099) hid queue value monitor is started (observed).
+[2026-03-17 09:00:15.671] [info] [core_service] virtual_hid_device_service_client_ virtual_hid_keyboard_ready_response: true
+[2026-03-17 09:00:15.674] [info] [core_service] Apple Internal Keyboard / Trackpad (device_id:4294969626) hid queue value monitor is started (grabbed).
+[2026-03-17 09:00:15.674] [info] [core_service] caps_lock_led_state_manager is started: Apple Internal Keyboard / Trackpad
+[2026-03-17 09:00:15.678] [info] [core_service] TouchBarUserDevice (device_id:4294970660) hid queue value monitor is started (grabbed).
+[2026-03-17 09:00:15.678] [info] [core_service] caps_lock_led_state_manager is started: TouchBarUserDevice
+[2026-03-18 08:37:56.894] [info] [core_service] version 15.9.0
+[2026-03-18 08:37:56.932] [info] [core_service] signing_information team_id: G43BCU2T37
+[2026-03-18 08:37:56.997] [info] [core_service] Karabiner-Elements.app path: file:///Applications/Karabiner-Elements.app/
+[2026-03-18 08:37:57.041] [info] [core_service] task_policy_set is called.
+[2026-03-18 08:37:57.046] [info] [core_service] session_monitor_receiver is initialized
+[2026-03-18 08:37:57.071] [info] [core_service] receiver is initialized
+[2026-03-18 08:37:57.073] [info] [core_service] session_monitor_receiver: bound
+[2026-03-18 08:37:57.073] [info] [core_service] receiver: bound
+[2026-03-18 08:37:57.073] [info] [core_service] receiver: chown socket: 0
+[2026-03-18 08:38:06.862] [info] [core_service] current_console_user_id: 501
+[2026-03-18 08:38:06.862] [info] [core_service] receiver is terminated
+[2026-03-18 08:38:06.864] [info] [core_service] receiver is initialized
+[2026-03-18 08:38:06.871] [info] [core_service] console_user_server_client is started.
+[2026-03-18 08:38:06.875] [info] [core_service] receiver: bound
+[2026-03-18 08:38:06.875] [info] [core_service] receiver: chown socket: 501
+[2026-03-18 08:38:06.877] [error] [core_service] console_user_server_client connect_failed: Connection refused
+[2026-03-18 08:38:07.887] [error] [core_service] console_user_server_client connect_failed: Connection refused
+[2026-03-18 08:38:08.889] [error] [core_service] console_user_server_client connect_failed: Connection refused
+[2026-03-18 08:38:09.892] [error] [core_service] console_user_server_client connect_failed: Connection refused
+[2026-03-18 08:38:10.895] [error] [core_service] console_user_server_client connect_failed: Connection refused
+[2026-03-18 08:38:11.599] [info] [core_service] `system_preferences` is updated.
+[2026-03-18 08:38:11.898] [info] [core_service] console_user_server_client is connected.
+[2026-03-18 08:38:11.928] [info] [core_service] device_grabber is started.
+[2026-03-18 08:38:11.979] [info] [core_service] event_tap_monitor initialized
+[2026-03-18 08:38:11.982] [info] [core_service] Load /Users/ammar/.config/karabiner/karabiner.json...
+[2026-03-18 08:38:11.983] [info] [core_service] core_configuration is updated.
+[2026-03-18 08:38:11.986] [info] [core_service] virtual_hid_device_service_client_ connected
+[2026-03-18 08:38:13.050] [warning] [core_service] virtual_hid_keyboard is not ready. Please wait for a while.
+[2026-03-18 08:38:13.057] [info] [core_service] caps lock is found on Apple Internal Keyboard / Trackpad
+[2026-03-18 08:38:13.112] [info] [core_service] caps lock is found on Karabiner DriverKit VirtualHIDKeyboard 1.8.0
+[2026-03-18 08:38:13.114] [info] [core_service] Karabiner DriverKit VirtualHIDKeyboard 1.8.0 (device_id:4294971100) hid queue value monitor is started (observed).
+[2026-03-18 08:38:13.994] [info] [core_service] virtual_hid_device_service_client_ virtual_hid_keyboard_ready_response: true
+[2026-03-18 08:38:13.997] [info] [core_service] Apple Internal Keyboard / Trackpad (device_id:4294969626) hid queue value monitor is started (grabbed).
+[2026-03-18 08:38:13.997] [info] [core_service] caps_lock_led_state_manager is started: Apple Internal Keyboard / Trackpad
+[2026-03-18 08:38:14.001] [info] [core_service] TouchBarUserDevice (device_id:4294970577) hid queue value monitor is started (grabbed).
+[2026-03-18 08:38:14.001] [info] [core_service] caps_lock_led_state_manager is started: TouchBarUserDevice
+[2026-03-18 18:22:20.157] [info] [core_service] version 15.9.0
+[2026-03-18 18:22:20.179] [info] [core_service] signing_information team_id: G43BCU2T37
+[2026-03-18 18:22:20.202] [info] [core_service] Karabiner-Elements.app path: file:///Applications/Karabiner-Elements.app/
+[2026-03-18 18:22:20.213] [info] [core_service] task_policy_set is called.
+[2026-03-18 18:22:20.214] [info] [core_service] session_monitor_receiver is initialized
+[2026-03-18 18:22:20.224] [info] [core_service] receiver is initialized
+[2026-03-18 18:22:20.225] [info] [core_service] receiver: bound
+[2026-03-18 18:22:20.225] [info] [core_service] receiver: chown socket: 0
+[2026-03-18 18:22:20.225] [info] [core_service] session_monitor_receiver: bound
+[2026-03-18 18:22:30.958] [info] [core_service] current_console_user_id: 501
+[2026-03-18 18:22:30.958] [info] [core_service] receiver is terminated
+[2026-03-18 18:22:30.959] [info] [core_service] receiver is initialized
+[2026-03-18 18:22:30.965] [info] [core_service] console_user_server_client is started.
+[2026-03-18 18:22:30.967] [info] [core_service] receiver: bound
+[2026-03-18 18:22:30.967] [info] [core_service] receiver: chown socket: 501
+[2026-03-18 18:22:30.970] [error] [core_service] console_user_server_client connect_failed: Connection refused
+[2026-03-18 18:22:31.983] [error] [core_service] console_user_server_client connect_failed: Connection refused
+[2026-03-18 18:22:32.324] [info] [core_service] `system_preferences` is updated.
+[2026-03-18 18:22:32.979] [info] [core_service] console_user_server_client is connected.
+[2026-03-18 18:22:32.996] [info] [core_service] device_grabber is started.
+[2026-03-18 18:22:33.039] [info] [core_service] event_tap_monitor initialized
+[2026-03-18 18:22:33.044] [info] [core_service] Load /Users/ammar/.config/karabiner/karabiner.json...
+[2026-03-18 18:22:33.045] [info] [core_service] core_configuration is updated.
+[2026-03-18 18:22:33.051] [info] [core_service] virtual_hid_device_service_client_ connected
+[2026-03-18 18:22:34.135] [warning] [core_service] virtual_hid_keyboard is not ready. Please wait for a while.
+[2026-03-18 18:22:34.140] [info] [core_service] caps lock is found on Apple Internal Keyboard / Trackpad
+[2026-03-18 18:22:34.178] [info] [core_service] caps lock is found on Karabiner DriverKit VirtualHIDKeyboard 1.8.0
+[2026-03-18 18:22:34.180] [info] [core_service] Karabiner DriverKit VirtualHIDKeyboard 1.8.0 (device_id:4294971222) hid queue value monitor is started (observed).
+[2026-03-18 18:22:35.065] [info] [core_service] virtual_hid_device_service_client_ virtual_hid_keyboard_ready_response: true
+[2026-03-18 18:22:35.067] [info] [core_service] Apple Internal Keyboard / Trackpad (device_id:4294969625) hid queue value monitor is started (grabbed).
+[2026-03-18 18:22:35.067] [info] [core_service] caps_lock_led_state_manager is started: Apple Internal Keyboard / Trackpad
+[2026-03-18 18:22:35.071] [info] [core_service] TouchBarUserDevice (device_id:4294970672) hid queue value monitor is started (grabbed).
+[2026-03-18 18:22:35.072] [info] [core_service] caps_lock_led_state_manager is started: TouchBarUserDevice
+[2026-03-18 23:44:37.865] [info] [core_service] Aavante Bar 610 (device_id:4294972431) is terminated.
+[2026-03-19 16:06:12.392] [info] [core_service] version 15.9.0
+[2026-03-19 16:06:12.424] [info] [core_service] signing_information team_id: G43BCU2T37
+[2026-03-19 16:06:12.442] [info] [core_service] Karabiner-Elements.app path: file:///Applications/Karabiner-Elements.app/
+[2026-03-19 16:06:12.461] [info] [core_service] task_policy_set is called.
+[2026-03-19 16:06:12.463] [info] [core_service] session_monitor_receiver is initialized
+[2026-03-19 16:06:12.473] [info] [core_service] receiver is initialized
+[2026-03-19 16:06:12.476] [info] [core_service] receiver: bound
+[2026-03-19 16:06:12.476] [info] [core_service] receiver: chown socket: 0
+[2026-03-19 16:06:12.476] [info] [core_service] session_monitor_receiver: bound
+[2026-03-19 16:06:22.632] [info] [core_service] current_console_user_id: 501
+[2026-03-19 16:06:22.633] [info] [core_service] receiver is terminated
+[2026-03-19 16:06:22.636] [info] [core_service] receiver is initialized
+[2026-03-19 16:06:22.642] [info] [core_service] console_user_server_client is started.
+[2026-03-19 16:06:22.648] [info] [core_service] receiver: bound
+[2026-03-19 16:06:22.648] [info] [core_service] receiver: chown socket: 501
+[2026-03-19 16:06:22.649] [error] [core_service] console_user_server_client connect_failed: Connection refused
+[2026-03-19 16:06:23.654] [error] [core_service] console_user_server_client connect_failed: Connection refused
+[2026-03-19 16:06:24.658] [error] [core_service] console_user_server_client connect_failed: Connection refused
+[2026-03-19 16:06:25.656] [error] [core_service] console_user_server_client connect_failed: No such file or directory
+[2026-03-19 16:06:25.660] [error] [core_service] console_user_server_client connect_failed: No such file or directory
+[2026-03-19 16:06:25.678] [info] [core_service] `system_preferences` is updated.
+[2026-03-19 16:06:26.668] [info] [core_service] console_user_server_client is connected.
+[2026-03-19 16:06:26.933] [info] [core_service] device_grabber is started.
+[2026-03-19 16:06:26.983] [info] [core_service] event_tap_monitor initialized
+[2026-03-19 16:06:26.987] [info] [core_service] Load /Users/ammar/.config/karabiner/karabiner.json...
+[2026-03-19 16:06:26.988] [info] [core_service] core_configuration is updated.
+[2026-03-19 16:06:26.994] [info] [core_service] virtual_hid_device_service_client_ connected
+[2026-03-19 16:06:28.099] [warning] [core_service] virtual_hid_keyboard is not ready. Please wait for a while.
+[2026-03-19 16:06:28.103] [info] [core_service] caps lock is found on Apple Internal Keyboard / Trackpad
+[2026-03-19 16:06:28.143] [info] [core_service] caps lock is found on Karabiner DriverKit VirtualHIDKeyboard 1.8.0
+[2026-03-19 16:06:28.146] [info] [core_service] Karabiner DriverKit VirtualHIDKeyboard 1.8.0 (device_id:4294971107) hid queue value monitor is started (observed).
+[2026-03-19 16:06:29.007] [info] [core_service] virtual_hid_device_service_client_ virtual_hid_keyboard_ready_response: true
+[2026-03-19 16:06:29.009] [info] [core_service] Apple Internal Keyboard / Trackpad (device_id:4294969624) hid queue value monitor is started (grabbed).
+[2026-03-19 16:06:29.009] [info] [core_service] caps_lock_led_state_manager is started: Apple Internal Keyboard / Trackpad
+[2026-03-19 16:06:29.013] [info] [core_service] TouchBarUserDevice (device_id:4294970431) hid queue value monitor is started (grabbed).
+[2026-03-19 16:06:29.013] [info] [core_service] caps_lock_led_state_manager is started: TouchBarUserDevice
+[2026-03-20 06:04:05.272] [info] [core_service] version 15.9.0
+[2026-03-20 06:04:05.291] [info] [core_service] signing_information team_id: G43BCU2T37
+[2026-03-20 06:04:05.312] [info] [core_service] Karabiner-Elements.app path: file:///Applications/Karabiner-Elements.app/
+[2026-03-20 06:04:05.324] [info] [core_service] task_policy_set is called.
+[2026-03-20 06:04:05.325] [info] [core_service] session_monitor_receiver is initialized
+[2026-03-20 06:04:05.337] [info] [core_service] receiver is initialized
+[2026-03-20 06:04:05.340] [info] [core_service] receiver: bound
+[2026-03-20 06:04:05.340] [info] [core_service] receiver: chown socket: 0
+[2026-03-20 06:04:05.340] [info] [core_service] session_monitor_receiver: bound
+[2026-03-20 06:04:17.730] [info] [core_service] current_console_user_id: 501
+[2026-03-20 06:04:17.731] [info] [core_service] receiver is terminated
+[2026-03-20 06:04:17.733] [info] [core_service] receiver is initialized
+[2026-03-20 06:04:17.739] [info] [core_service] console_user_server_client is started.
+[2026-03-20 06:04:17.741] [info] [core_service] receiver: bound
+[2026-03-20 06:04:17.741] [info] [core_service] receiver: chown socket: 501
+[2026-03-20 06:04:17.742] [error] [core_service] console_user_server_client connect_failed: Connection refused
+[2026-03-20 06:04:18.766] [error] [core_service] console_user_server_client connect_failed: Connection refused
+[2026-03-20 06:04:19.749] [error] [core_service] console_user_server_client connect_failed: Connection refused
+[2026-03-20 06:04:19.769] [error] [core_service] console_user_server_client connect_failed: Connection refused
+[2026-03-20 06:04:20.725] [info] [core_service] `system_preferences` is updated.
+[2026-03-20 06:04:20.751] [info] [core_service] console_user_server_client is connected.
+[2026-03-20 06:04:20.766] [info] [core_service] device_grabber is started.
+[2026-03-20 06:04:20.807] [info] [core_service] event_tap_monitor initialized
+[2026-03-20 06:04:20.811] [info] [core_service] Load /Users/ammar/.config/karabiner/karabiner.json...
+[2026-03-20 06:04:20.812] [info] [core_service] core_configuration is updated.
+[2026-03-20 06:04:20.815] [info] [core_service] virtual_hid_device_service_client_ connected
+[2026-03-20 06:04:21.883] [warning] [core_service] virtual_hid_keyboard is not ready. Please wait for a while.
+[2026-03-20 06:04:21.886] [info] [core_service] caps lock is found on Apple Internal Keyboard / Trackpad
+[2026-03-20 06:04:21.924] [info] [core_service] caps lock is found on Karabiner DriverKit VirtualHIDKeyboard 1.8.0
+[2026-03-20 06:04:21.927] [info] [core_service] Karabiner DriverKit VirtualHIDKeyboard 1.8.0 (device_id:4294971114) hid queue value monitor is started (observed).
+[2026-03-20 06:04:22.828] [info] [core_service] virtual_hid_device_service_client_ virtual_hid_keyboard_ready_response: true
+[2026-03-20 06:04:22.829] [info] [core_service] Apple Internal Keyboard / Trackpad (device_id:4294969636) hid queue value monitor is started (grabbed).
+[2026-03-20 06:04:22.829] [info] [core_service] caps_lock_led_state_manager is started: Apple Internal Keyboard / Trackpad
+[2026-03-20 06:04:22.833] [info] [core_service] TouchBarUserDevice (device_id:4294970558) hid queue value monitor is started (grabbed).
+[2026-03-20 06:04:22.833] [info] [core_service] caps_lock_led_state_manager is started: TouchBarUserDevice
+[2026-03-20 10:31:26.607] [info] [core_service] version 15.9.0
+[2026-03-20 10:31:26.668] [info] [core_service] signing_information team_id: G43BCU2T37
+[2026-03-20 10:31:26.689] [info] [core_service] Karabiner-Elements.app path: file:///Applications/Karabiner-Elements.app/
+[2026-03-20 10:31:26.707] [info] [core_service] task_policy_set is called.
+[2026-03-20 10:31:26.709] [info] [core_service] session_monitor_receiver is initialized
+[2026-03-20 10:31:26.718] [info] [core_service] receiver is initialized
+[2026-03-20 10:31:26.720] [info] [core_service] session_monitor_receiver: bound
+[2026-03-20 10:31:26.720] [info] [core_service] receiver: bound
+[2026-03-20 10:31:26.720] [info] [core_service] receiver: chown socket: 0
+[2026-03-20 10:31:37.490] [info] [core_service] current_console_user_id: 501
+[2026-03-20 10:31:37.490] [info] [core_service] receiver is terminated
+[2026-03-20 10:31:37.492] [info] [core_service] receiver is initialized
+[2026-03-20 10:31:37.498] [info] [core_service] console_user_server_client is started.
+[2026-03-20 10:31:37.501] [info] [core_service] receiver: bound
+[2026-03-20 10:31:37.501] [info] [core_service] receiver: chown socket: 501
+[2026-03-20 10:31:37.502] [error] [core_service] console_user_server_client connect_failed: Connection refused
+[2026-03-20 10:31:38.506] [error] [core_service] console_user_server_client connect_failed: Connection refused
+[2026-03-20 10:31:39.511] [error] [core_service] console_user_server_client connect_failed: Connection refused
+[2026-03-20 10:31:40.307] [info] [core_service] `system_preferences` is updated.
+[2026-03-20 10:31:40.513] [info] [core_service] console_user_server_client is connected.
+[2026-03-20 10:31:40.534] [info] [core_service] device_grabber is started.
+[2026-03-20 10:31:40.580] [info] [core_service] event_tap_monitor initialized
+[2026-03-20 10:31:40.583] [info] [core_service] Load /Users/ammar/.config/karabiner/karabiner.json...
+[2026-03-20 10:31:40.584] [info] [core_service] core_configuration is updated.
+[2026-03-20 10:31:40.586] [info] [core_service] virtual_hid_device_service_client_ connected
+[2026-03-20 10:31:41.659] [warning] [core_service] virtual_hid_keyboard is not ready. Please wait for a while.
+[2026-03-20 10:31:41.667] [info] [core_service] caps lock is found on Apple Internal Keyboard / Trackpad
+[2026-03-20 10:31:41.722] [info] [core_service] caps lock is found on Karabiner DriverKit VirtualHIDKeyboard 1.8.0
+[2026-03-20 10:31:41.725] [info] [core_service] Karabiner DriverKit VirtualHIDKeyboard 1.8.0 (device_id:4294971120) hid queue value monitor is started (observed).
+[2026-03-20 10:31:42.597] [info] [core_service] virtual_hid_device_service_client_ virtual_hid_keyboard_ready_response: true
+[2026-03-20 10:31:42.599] [info] [core_service] Apple Internal Keyboard / Trackpad (device_id:4294969625) hid queue value monitor is started (grabbed).
+[2026-03-20 10:31:42.599] [info] [core_service] caps_lock_led_state_manager is started: Apple Internal Keyboard / Trackpad
+[2026-03-20 10:31:42.603] [info] [core_service] TouchBarUserDevice (device_id:4294970614) hid queue value monitor is started (grabbed).
+[2026-03-20 10:31:42.603] [info] [core_service] caps_lock_led_state_manager is started: TouchBarUserDevice
+[2026-03-20 15:04:57.728] [info] [core_service] version 15.9.0
+[2026-03-20 15:04:57.755] [info] [core_service] signing_information team_id: G43BCU2T37
+[2026-03-20 15:04:57.775] [info] [core_service] Karabiner-Elements.app path: file:///Applications/Karabiner-Elements.app/
+[2026-03-20 15:04:57.786] [info] [core_service] task_policy_set is called.
+[2026-03-20 15:04:57.787] [info] [core_service] session_monitor_receiver is initialized
+[2026-03-20 15:04:57.798] [info] [core_service] receiver is initialized
+[2026-03-20 15:04:57.799] [info] [core_service] receiver: bound
+[2026-03-20 15:04:57.799] [info] [core_service] receiver: chown socket: 0
+[2026-03-20 15:04:57.799] [info] [core_service] session_monitor_receiver: bound
+[2026-03-20 15:05:07.388] [info] [core_service] current_console_user_id: 501
+[2026-03-20 15:05:07.388] [info] [core_service] receiver is terminated
+[2026-03-20 15:05:07.389] [info] [core_service] receiver is initialized
+[2026-03-20 15:05:07.394] [info] [core_service] console_user_server_client is started.
+[2026-03-20 15:05:07.396] [info] [core_service] receiver: bound
+[2026-03-20 15:05:07.396] [info] [core_service] receiver: chown socket: 501
+[2026-03-20 15:05:07.397] [error] [core_service] console_user_server_client connect_failed: Connection refused
+[2026-03-20 15:05:08.402] [error] [core_service] console_user_server_client connect_failed: Connection refused
+[2026-03-20 15:05:09.408] [error] [core_service] console_user_server_client connect_failed: Connection refused
+[2026-03-20 15:05:10.408] [error] [core_service] console_user_server_client connect_failed: Connection refused
+[2026-03-20 15:05:10.411] [error] [core_service] console_user_server_client connect_failed: Connection refused
+[2026-03-20 15:05:10.582] [info] [core_service] `system_preferences` is updated.
+[2026-03-20 15:05:11.415] [info] [core_service] console_user_server_client is connected.
+[2026-03-20 15:05:11.441] [info] [core_service] device_grabber is started.
+[2026-03-20 15:05:11.488] [info] [core_service] event_tap_monitor initialized
+[2026-03-20 15:05:11.492] [info] [core_service] Load /Users/ammar/.config/karabiner/karabiner.json...
+[2026-03-20 15:05:11.492] [info] [core_service] core_configuration is updated.
+[2026-03-20 15:05:11.495] [info] [core_service] virtual_hid_device_service_client_ connected
+[2026-03-20 15:05:12.580] [warning] [core_service] virtual_hid_keyboard is not ready. Please wait for a while.
+[2026-03-20 15:05:12.586] [info] [core_service] caps lock is found on Apple Internal Keyboard / Trackpad
+[2026-03-20 15:05:12.645] [info] [core_service] caps lock is found on Karabiner DriverKit VirtualHIDKeyboard 1.8.0
+[2026-03-20 15:05:12.648] [info] [core_service] Karabiner DriverKit VirtualHIDKeyboard 1.8.0 (device_id:4294971104) hid queue value monitor is started (observed).
+[2026-03-20 15:05:13.511] [info] [core_service] virtual_hid_device_service_client_ virtual_hid_keyboard_ready_response: true
+[2026-03-20 15:05:13.513] [info] [core_service] Apple Internal Keyboard / Trackpad (device_id:4294969625) hid queue value monitor is started (grabbed).
+[2026-03-20 15:05:13.513] [info] [core_service] caps_lock_led_state_manager is started: Apple Internal Keyboard / Trackpad
+[2026-03-20 15:05:13.518] [info] [core_service] TouchBarUserDevice (device_id:4294970591) hid queue value monitor is started (grabbed).
+[2026-03-20 15:05:13.519] [info] [core_service] caps_lock_led_state_manager is started: TouchBarUserDevice
+[2026-03-20 19:18:57.853] [info] [core_service] version 15.9.0
+[2026-03-20 19:18:57.891] [info] [core_service] signing_information team_id: G43BCU2T37
+[2026-03-20 19:18:57.916] [info] [core_service] Karabiner-Elements.app path: file:///Applications/Karabiner-Elements.app/
+[2026-03-20 19:18:57.932] [info] [core_service] task_policy_set is called.
+[2026-03-20 19:18:57.933] [info] [core_service] session_monitor_receiver is initialized
+[2026-03-20 19:18:57.946] [info] [core_service] receiver is initialized
+[2026-03-20 19:18:57.966] [info] [core_service] receiver: bound
+[2026-03-20 19:18:57.966] [info] [core_service] receiver: chown socket: 0
+[2026-03-20 19:18:57.966] [info] [core_service] session_monitor_receiver: bound
+[2026-03-20 19:19:09.212] [info] [core_service] current_console_user_id: 501
+[2026-03-20 19:19:09.212] [info] [core_service] receiver is terminated
+[2026-03-20 19:19:09.214] [info] [core_service] receiver is initialized
+[2026-03-20 19:19:09.223] [info] [core_service] console_user_server_client is started.
+[2026-03-20 19:19:09.227] [info] [core_service] receiver: bound
+[2026-03-20 19:19:09.227] [info] [core_service] receiver: chown socket: 501
+[2026-03-20 19:19:09.230] [error] [core_service] console_user_server_client connect_failed: Connection refused
+[2026-03-20 19:19:10.233] [error] [core_service] console_user_server_client connect_failed: Connection refused
+[2026-03-20 19:19:11.241] [error] [core_service] console_user_server_client connect_failed: Connection refused
+[2026-03-20 19:19:11.971] [info] [core_service] `system_preferences` is updated.
+[2026-03-20 19:19:12.240] [info] [core_service] console_user_server_client is connected.
+[2026-03-20 19:19:12.319] [info] [core_service] device_grabber is started.
+[2026-03-20 19:19:12.378] [info] [core_service] event_tap_monitor initialized
+[2026-03-20 19:19:12.382] [info] [core_service] Load /Users/ammar/.config/karabiner/karabiner.json...
+[2026-03-20 19:19:12.383] [info] [core_service] core_configuration is updated.
+[2026-03-20 19:19:12.385] [info] [core_service] virtual_hid_device_service_client_ connected
+[2026-03-20 19:19:13.448] [warning] [core_service] virtual_hid_keyboard is not ready. Please wait for a while.
+[2026-03-20 19:19:13.456] [info] [core_service] caps lock is found on Apple Internal Keyboard / Trackpad
+[2026-03-20 19:19:13.509] [info] [core_service] caps lock is found on Karabiner DriverKit VirtualHIDKeyboard 1.8.0
+[2026-03-20 19:19:13.512] [info] [core_service] Karabiner DriverKit VirtualHIDKeyboard 1.8.0 (device_id:4294971117) hid queue value monitor is started (observed).
+[2026-03-20 19:19:14.398] [info] [core_service] virtual_hid_device_service_client_ virtual_hid_keyboard_ready_response: true
+[2026-03-20 19:19:14.399] [info] [core_service] Apple Internal Keyboard / Trackpad (device_id:4294969621) hid queue value monitor is started (grabbed).
+[2026-03-20 19:19:14.399] [info] [core_service] caps_lock_led_state_manager is started: Apple Internal Keyboard / Trackpad
+[2026-03-20 19:19:14.404] [info] [core_service] TouchBarUserDevice (device_id:4294970565) hid queue value monitor is started (grabbed).
+[2026-03-20 19:19:14.404] [info] [core_service] caps_lock_led_state_manager is started: TouchBarUserDevice
+[2026-03-20 20:59:31.806] [info] [core_service] version 15.9.0
+[2026-03-20 20:59:31.836] [info] [core_service] signing_information team_id: G43BCU2T37
+[2026-03-20 20:59:31.857] [info] [core_service] Karabiner-Elements.app path: file:///Applications/Karabiner-Elements.app/
+[2026-03-20 20:59:31.880] [info] [core_service] task_policy_set is called.
+[2026-03-20 20:59:31.881] [info] [core_service] session_monitor_receiver is initialized
+[2026-03-20 20:59:31.920] [info] [core_service] receiver is initialized
+[2026-03-20 20:59:31.923] [info] [core_service] receiver: bound
+[2026-03-20 20:59:31.923] [info] [core_service] receiver: chown socket: 0
+[2026-03-20 20:59:31.923] [info] [core_service] session_monitor_receiver: bound
+[2026-03-20 20:59:42.114] [info] [core_service] current_console_user_id: 501
+[2026-03-20 20:59:42.114] [info] [core_service] receiver is terminated
+[2026-03-20 20:59:42.115] [info] [core_service] receiver is initialized
+[2026-03-20 20:59:42.123] [info] [core_service] console_user_server_client is started.
+[2026-03-20 20:59:42.125] [info] [core_service] receiver: bound
+[2026-03-20 20:59:42.125] [info] [core_service] receiver: chown socket: 501
+[2026-03-20 20:59:42.125] [error] [core_service] console_user_server_client connect_failed: Connection refused
+[2026-03-20 20:59:43.134] [error] [core_service] console_user_server_client connect_failed: Connection refused
+[2026-03-20 20:59:43.378] [info] [core_service] `system_preferences` is updated.
+[2026-03-20 20:59:44.139] [info] [core_service] console_user_server_client is connected.
+[2026-03-20 20:59:44.166] [info] [core_service] device_grabber is started.
+[2026-03-20 20:59:44.214] [info] [core_service] event_tap_monitor initialized
+[2026-03-20 20:59:44.221] [info] [core_service] Load /Users/ammar/.config/karabiner/karabiner.json...
+[2026-03-20 20:59:44.222] [info] [core_service] core_configuration is updated.
+[2026-03-20 20:59:44.224] [info] [core_service] virtual_hid_device_service_client_ connected
+[2026-03-20 20:59:45.285] [warning] [core_service] virtual_hid_keyboard is not ready. Please wait for a while.
+[2026-03-20 20:59:45.289] [info] [core_service] caps lock is found on Apple Internal Keyboard / Trackpad
+[2026-03-20 20:59:45.326] [info] [core_service] caps lock is found on Karabiner DriverKit VirtualHIDKeyboard 1.8.0
+[2026-03-20 20:59:45.329] [info] [core_service] Karabiner DriverKit VirtualHIDKeyboard 1.8.0 (device_id:4294971073) hid queue value monitor is started (observed).
+[2026-03-20 20:59:46.239] [info] [core_service] virtual_hid_device_service_client_ virtual_hid_keyboard_ready_response: true
+[2026-03-20 20:59:46.242] [info] [core_service] Apple Internal Keyboard / Trackpad (device_id:4294969625) hid queue value monitor is started (grabbed).
+[2026-03-20 20:59:46.242] [info] [core_service] caps_lock_led_state_manager is started: Apple Internal Keyboard / Trackpad
+[2026-03-20 20:59:46.248] [info] [core_service] TouchBarUserDevice (device_id:4294970544) hid queue value monitor is started (grabbed).
+[2026-03-20 20:59:46.248] [info] [core_service] caps_lock_led_state_manager is started: TouchBarUserDevice
+[2026-03-21 06:45:36.515] [info] [core_service] version 15.9.0
+[2026-03-21 06:45:36.548] [info] [core_service] signing_information team_id: G43BCU2T37
+[2026-03-21 06:45:36.606] [info] [core_service] Karabiner-Elements.app path: file:///Applications/Karabiner-Elements.app/
+[2026-03-21 06:45:36.625] [info] [core_service] task_policy_set is called.
+[2026-03-21 06:45:36.627] [info] [core_service] session_monitor_receiver is initialized
+[2026-03-21 06:45:36.636] [info] [core_service] receiver is initialized
+[2026-03-21 06:45:36.642] [info] [core_service] receiver: bound
+[2026-03-21 06:45:36.642] [info] [core_service] receiver: chown socket: 0
+[2026-03-21 06:45:36.642] [info] [core_service] session_monitor_receiver: bound
+[2026-03-21 06:45:46.779] [info] [core_service] current_console_user_id: 501
+[2026-03-21 06:45:46.779] [info] [core_service] receiver is terminated
+[2026-03-21 06:45:46.781] [info] [core_service] receiver is initialized
+[2026-03-21 06:45:46.786] [info] [core_service] console_user_server_client is started.
+[2026-03-21 06:45:46.788] [info] [core_service] receiver: bound
+[2026-03-21 06:45:46.788] [info] [core_service] receiver: chown socket: 501
+[2026-03-21 06:45:46.789] [error] [core_service] console_user_server_client connect_failed: Connection refused
+[2026-03-21 06:45:47.796] [error] [core_service] console_user_server_client connect_failed: Connection refused
+[2026-03-21 06:45:48.803] [error] [core_service] console_user_server_client connect_failed: Connection refused
+[2026-03-21 06:45:49.105] [info] [core_service] `system_preferences` is updated.
+[2026-03-21 06:45:49.806] [info] [core_service] console_user_server_client is connected.
+[2026-03-21 06:45:49.876] [info] [core_service] device_grabber is started.
+[2026-03-21 06:45:49.929] [info] [core_service] event_tap_monitor initialized
+[2026-03-21 06:45:49.933] [info] [core_service] Load /Users/ammar/.config/karabiner/karabiner.json...
+[2026-03-21 06:45:49.934] [info] [core_service] core_configuration is updated.
+[2026-03-21 06:45:49.936] [info] [core_service] virtual_hid_device_service_client_ connected
+[2026-03-21 06:45:51.000] [warning] [core_service] virtual_hid_keyboard is not ready. Please wait for a while.
+[2026-03-21 06:45:51.005] [info] [core_service] caps lock is found on Apple Internal Keyboard / Trackpad
+[2026-03-21 06:45:51.059] [info] [core_service] caps lock is found on Karabiner DriverKit VirtualHIDKeyboard 1.8.0
+[2026-03-21 06:45:51.069] [info] [core_service] Karabiner DriverKit VirtualHIDKeyboard 1.8.0 (device_id:4294971065) hid queue value monitor is started (observed).
+[2026-03-21 06:45:51.950] [info] [core_service] virtual_hid_device_service_client_ virtual_hid_keyboard_ready_response: true
+[2026-03-21 06:45:51.952] [info] [core_service] Apple Internal Keyboard / Trackpad (device_id:4294969625) hid queue value monitor is started (grabbed).
+[2026-03-21 06:45:51.952] [info] [core_service] caps_lock_led_state_manager is started: Apple Internal Keyboard / Trackpad
+[2026-03-21 06:45:51.956] [info] [core_service] TouchBarUserDevice (device_id:4294970428) hid queue value monitor is started (grabbed).
+[2026-03-21 06:45:51.956] [info] [core_service] caps_lock_led_state_manager is started: TouchBarUserDevice
+[2026-03-21 17:53:42.647] [info] [core_service] version 15.9.0
+[2026-03-21 17:53:42.670] [info] [core_service] signing_information team_id: G43BCU2T37
+[2026-03-21 17:53:42.689] [info] [core_service] Karabiner-Elements.app path: file:///Applications/Karabiner-Elements.app/
+[2026-03-21 17:53:42.717] [info] [core_service] task_policy_set is called.
+[2026-03-21 17:53:42.718] [info] [core_service] session_monitor_receiver is initialized
+[2026-03-21 17:53:42.730] [info] [core_service] receiver is initialized
+[2026-03-21 17:53:42.732] [info] [core_service] receiver: bound
+[2026-03-21 17:53:42.732] [info] [core_service] receiver: chown socket: 0
+[2026-03-21 17:53:42.732] [info] [core_service] session_monitor_receiver: bound
+[2026-03-21 17:53:53.305] [info] [core_service] current_console_user_id: 501
+[2026-03-21 17:53:53.306] [info] [core_service] receiver is terminated
+[2026-03-21 17:53:53.308] [info] [core_service] receiver is initialized
+[2026-03-21 17:53:53.312] [info] [core_service] console_user_server_client is started.
+[2026-03-21 17:53:53.314] [info] [core_service] receiver: bound
+[2026-03-21 17:53:53.314] [info] [core_service] receiver: chown socket: 501
+[2026-03-21 17:53:53.315] [error] [core_service] console_user_server_client connect_failed: Connection refused
+[2026-03-21 17:53:54.299] [info] [core_service] `system_preferences` is updated.
+[2026-03-21 17:53:54.320] [info] [core_service] console_user_server_client is connected.
+[2026-03-21 17:53:54.328] [info] [core_service] device_grabber is started.
+[2026-03-21 17:53:54.384] [info] [core_service] event_tap_monitor initialized
+[2026-03-21 17:53:54.402] [info] [core_service] Load /Users/ammar/.config/karabiner/karabiner.json...
+[2026-03-21 17:53:54.403] [info] [core_service] core_configuration is updated.
+[2026-03-21 17:53:54.406] [info] [core_service] virtual_hid_device_service_client_ connected
+[2026-03-21 17:53:55.474] [warning] [core_service] virtual_hid_keyboard is not ready. Please wait for a while.
+[2026-03-21 17:53:55.478] [info] [core_service] caps lock is found on Apple Internal Keyboard / Trackpad
+[2026-03-21 17:53:55.516] [info] [core_service] caps lock is found on Karabiner DriverKit VirtualHIDKeyboard 1.8.0
+[2026-03-21 17:53:55.519] [info] [core_service] Karabiner DriverKit VirtualHIDKeyboard 1.8.0 (device_id:4294971065) hid queue value monitor is started (observed).
+[2026-03-21 17:53:56.422] [info] [core_service] virtual_hid_device_service_client_ virtual_hid_keyboard_ready_response: true
+[2026-03-21 17:53:56.423] [info] [core_service] Apple Internal Keyboard / Trackpad (device_id:4294969627) hid queue value monitor is started (grabbed).
+[2026-03-21 17:53:56.423] [info] [core_service] caps_lock_led_state_manager is started: Apple Internal Keyboard / Trackpad
+[2026-03-21 17:53:56.427] [info] [core_service] TouchBarUserDevice (device_id:4294970457) hid queue value monitor is started (grabbed).
+[2026-03-21 17:53:56.427] [info] [core_service] caps_lock_led_state_manager is started: TouchBarUserDevice
+[2026-03-21 20:07:25.428] [info] [core_service] version 15.9.0
+[2026-03-21 20:07:25.457] [info] [core_service] signing_information team_id: G43BCU2T37
+[2026-03-21 20:07:25.476] [info] [core_service] Karabiner-Elements.app path: file:///Applications/Karabiner-Elements.app/
+[2026-03-21 20:07:25.491] [info] [core_service] task_policy_set is called.
+[2026-03-21 20:07:25.495] [info] [core_service] session_monitor_receiver is initialized
+[2026-03-21 20:07:25.507] [info] [core_service] receiver is initialized
+[2026-03-21 20:07:25.510] [info] [core_service] receiver: bound
+[2026-03-21 20:07:25.510] [info] [core_service] receiver: chown socket: 0
+[2026-03-21 20:07:25.510] [info] [core_service] session_monitor_receiver: bound
+[2026-03-21 20:07:36.059] [info] [core_service] current_console_user_id: 501
+[2026-03-21 20:07:36.059] [info] [core_service] receiver is terminated
+[2026-03-21 20:07:36.060] [info] [core_service] receiver is initialized
+[2026-03-21 20:07:36.065] [info] [core_service] console_user_server_client is started.
+[2026-03-21 20:07:36.068] [info] [core_service] receiver: bound
+[2026-03-21 20:07:36.068] [info] [core_service] receiver: chown socket: 501
+[2026-03-21 20:07:36.069] [error] [core_service] console_user_server_client connect_failed: Connection refused
+[2026-03-21 20:07:37.075] [error] [core_service] console_user_server_client connect_failed: Connection refused
+[2026-03-21 20:07:38.079] [error] [core_service] console_user_server_client connect_failed: Connection refused
+[2026-03-21 20:07:39.081] [error] [core_service] console_user_server_client connect_failed: Connection refused
+[2026-03-21 20:07:39.719] [info] [core_service] `system_preferences` is updated.
+[2026-03-21 20:07:40.084] [info] [core_service] console_user_server_client is connected.
+[2026-03-21 20:07:43.096] [info] [core_service] device_grabber is started.
+[2026-03-21 20:07:43.144] [info] [core_service] event_tap_monitor initialized
+[2026-03-21 20:07:43.148] [info] [core_service] Load /Users/ammar/.config/karabiner/karabiner.json...
+[2026-03-21 20:07:43.149] [info] [core_service] core_configuration is updated.
+[2026-03-21 20:07:43.151] [info] [core_service] virtual_hid_device_service_client_ connected
+[2026-03-21 20:07:44.230] [warning] [core_service] virtual_hid_keyboard is not ready. Please wait for a while.
+[2026-03-21 20:07:44.233] [info] [core_service] caps lock is found on Apple Internal Keyboard / Trackpad
+[2026-03-21 20:07:44.268] [info] [core_service] caps lock is found on Karabiner DriverKit VirtualHIDKeyboard 1.8.0
+[2026-03-21 20:07:44.271] [info] [core_service] Karabiner DriverKit VirtualHIDKeyboard 1.8.0 (device_id:4294971162) hid queue value monitor is started (observed).
+[2026-03-21 20:07:45.165] [info] [core_service] virtual_hid_device_service_client_ virtual_hid_keyboard_ready_response: true
+[2026-03-21 20:07:45.167] [info] [core_service] Apple Internal Keyboard / Trackpad (device_id:4294969625) hid queue value monitor is started (grabbed).
+[2026-03-21 20:07:45.167] [info] [core_service] caps_lock_led_state_manager is started: Apple Internal Keyboard / Trackpad
+[2026-03-21 20:07:45.171] [info] [core_service] TouchBarUserDevice (device_id:4294970425) hid queue value monitor is started (grabbed).
+[2026-03-21 20:07:45.172] [info] [core_service] caps_lock_led_state_manager is started: TouchBarUserDevice
+[2026-03-23 04:54:16.217] [info] [core_service] version 15.9.0
+[2026-03-23 04:54:16.239] [info] [core_service] signing_information team_id: G43BCU2T37
+[2026-03-23 04:54:16.257] [info] [core_service] Karabiner-Elements.app path: file:///Applications/Karabiner-Elements.app/
+[2026-03-23 04:54:16.292] [info] [core_service] task_policy_set is called.
+[2026-03-23 04:54:16.297] [info] [core_service] session_monitor_receiver is initialized
+[2026-03-23 04:54:16.314] [info] [core_service] receiver is initialized
+[2026-03-23 04:54:16.317] [info] [core_service] receiver: bound
+[2026-03-23 04:54:16.317] [info] [core_service] receiver: chown socket: 0
+[2026-03-23 04:54:16.318] [info] [core_service] session_monitor_receiver: bound
+[2026-03-23 04:54:27.285] [info] [core_service] current_console_user_id: 501
+[2026-03-23 04:54:27.286] [info] [core_service] receiver is terminated
+[2026-03-23 04:54:27.287] [info] [core_service] receiver is initialized
+[2026-03-23 04:54:27.297] [info] [core_service] console_user_server_client is started.
+[2026-03-23 04:54:27.301] [info] [core_service] receiver: bound
+[2026-03-23 04:54:27.301] [info] [core_service] receiver: chown socket: 501
+[2026-03-23 04:54:27.302] [error] [core_service] console_user_server_client connect_failed: Connection refused
+[2026-03-23 04:54:28.311] [error] [core_service] console_user_server_client connect_failed: Connection refused
+[2026-03-23 04:54:29.310] [error] [core_service] console_user_server_client connect_failed: Connection refused
+[2026-03-23 04:54:29.316] [error] [core_service] console_user_server_client connect_failed: Connection refused
+[2026-03-23 04:54:30.038] [info] [core_service] `system_preferences` is updated.
+[2026-03-23 04:54:30.315] [info] [core_service] console_user_server_client is connected.
+[2026-03-23 04:54:30.330] [info] [core_service] device_grabber is started.
+[2026-03-23 04:54:30.375] [info] [core_service] event_tap_monitor initialized
+[2026-03-23 04:54:30.378] [info] [core_service] Load /Users/ammar/.config/karabiner/karabiner.json...
+[2026-03-23 04:54:30.379] [info] [core_service] core_configuration is updated.
+[2026-03-23 04:54:30.382] [info] [core_service] virtual_hid_device_service_client_ connected
+[2026-03-23 04:54:31.444] [warning] [core_service] virtual_hid_keyboard is not ready. Please wait for a while.
+[2026-03-23 04:54:31.448] [info] [core_service] caps lock is found on Apple Internal Keyboard / Trackpad
+[2026-03-23 04:54:31.484] [info] [core_service] caps lock is found on Karabiner DriverKit VirtualHIDKeyboard 1.8.0
+[2026-03-23 04:54:31.487] [info] [core_service] Karabiner DriverKit VirtualHIDKeyboard 1.8.0 (device_id:4294971284) hid queue value monitor is started (observed).
+[2026-03-23 04:54:32.393] [info] [core_service] virtual_hid_device_service_client_ virtual_hid_keyboard_ready_response: true
+[2026-03-23 04:54:32.397] [info] [core_service] Apple Internal Keyboard / Trackpad (device_id:4294969625) hid queue value monitor is started (grabbed).
+[2026-03-23 04:54:32.397] [info] [core_service] caps_lock_led_state_manager is started: Apple Internal Keyboard / Trackpad
+[2026-03-23 04:54:32.404] [info] [core_service] TouchBarUserDevice (device_id:4294970753) hid queue value monitor is started (grabbed).
+[2026-03-23 04:54:32.404] [info] [core_service] caps_lock_led_state_manager is started: TouchBarUserDevice
+[2026-03-23 07:18:40.874] [info] [core_service] version 15.9.0
+[2026-03-23 07:18:40.895] [info] [core_service] signing_information team_id: G43BCU2T37
+[2026-03-23 07:18:40.921] [info] [core_service] Karabiner-Elements.app path: file:///Applications/Karabiner-Elements.app/
+[2026-03-23 07:18:40.939] [info] [core_service] task_policy_set is called.
+[2026-03-23 07:18:40.941] [info] [core_service] session_monitor_receiver is initialized
+[2026-03-23 07:18:40.961] [info] [core_service] receiver is initialized
+[2026-03-23 07:18:40.964] [info] [core_service] receiver: bound
+[2026-03-23 07:18:40.964] [info] [core_service] receiver: chown socket: 0
+[2026-03-23 07:18:40.964] [info] [core_service] session_monitor_receiver: bound
+[2026-03-23 07:18:51.219] [info] [core_service] current_console_user_id: 501
+[2026-03-23 07:18:51.219] [info] [core_service] receiver is terminated
+[2026-03-23 07:18:51.221] [info] [core_service] receiver is initialized
+[2026-03-23 07:18:51.225] [info] [core_service] console_user_server_client is started.
+[2026-03-23 07:18:51.228] [info] [core_service] receiver: bound
+[2026-03-23 07:18:51.228] [info] [core_service] receiver: chown socket: 501
+[2026-03-23 07:18:51.229] [error] [core_service] console_user_server_client connect_failed: Connection refused
+[2026-03-23 07:18:52.237] [error] [core_service] console_user_server_client connect_failed: Connection refused
+[2026-03-23 07:18:53.242] [error] [core_service] console_user_server_client connect_failed: Connection refused
+[2026-03-23 07:18:54.241] [error] [core_service] console_user_server_client connect_failed: Connection refused
+[2026-03-23 07:18:54.245] [error] [core_service] console_user_server_client connect_failed: Connection refused
+[2026-03-23 07:18:55.247] [error] [core_service] console_user_server_client connect_failed: Connection refused
+[2026-03-23 07:18:56.256] [error] [core_service] console_user_server_client connect_failed: Connection refused
+[2026-03-23 07:18:57.263] [error] [core_service] console_user_server_client connect_failed: Connection refused
+[2026-03-23 07:18:58.261] [error] [core_service] console_user_server_client connect_failed: Connection refused
+[2026-03-23 07:18:58.265] [error] [core_service] console_user_server_client connect_failed: Connection refused
+[2026-03-23 07:18:59.264] [error] [core_service] console_user_server_client connect_failed: Connection refused
+[2026-03-23 07:18:59.268] [error] [core_service] console_user_server_client connect_failed: Connection refused
+[2026-03-23 07:18:59.753] [info] [core_service] `system_preferences` is updated.
+[2026-03-23 07:19:00.270] [info] [core_service] console_user_server_client is connected.
+[2026-03-23 07:19:00.283] [info] [core_service] device_grabber is started.
+[2026-03-23 07:19:00.357] [info] [core_service] event_tap_monitor initialized
+[2026-03-23 07:19:00.361] [info] [core_service] Load /Users/ammar/.config/karabiner/karabiner.json...
+[2026-03-23 07:19:00.361] [info] [core_service] core_configuration is updated.
+[2026-03-23 07:19:00.364] [info] [core_service] virtual_hid_device_service_client_ connected
+[2026-03-23 07:19:01.425] [warning] [core_service] virtual_hid_keyboard is not ready. Please wait for a while.
+[2026-03-23 07:19:01.429] [info] [core_service] caps lock is found on Apple Internal Keyboard / Trackpad
+[2026-03-23 07:19:01.465] [info] [core_service] caps lock is found on Karabiner DriverKit VirtualHIDKeyboard 1.8.0
+[2026-03-23 07:19:01.467] [info] [core_service] Karabiner DriverKit VirtualHIDKeyboard 1.8.0 (device_id:4294971628) hid queue value monitor is started (observed).
+[2026-03-23 07:19:02.379] [info] [core_service] virtual_hid_device_service_client_ virtual_hid_keyboard_ready_response: true
+[2026-03-23 07:19:02.381] [info] [core_service] Apple Internal Keyboard / Trackpad (device_id:4294969625) hid queue value monitor is started (grabbed).
+[2026-03-23 07:19:02.381] [info] [core_service] caps_lock_led_state_manager is started: Apple Internal Keyboard / Trackpad
+[2026-03-23 07:19:02.387] [info] [core_service] TouchBarUserDevice (device_id:4294971059) hid queue value monitor is started (grabbed).
+[2026-03-23 07:19:02.387] [info] [core_service] caps_lock_led_state_manager is started: TouchBarUserDevice
+[2026-03-23 15:24:47.846] [info] [core_service] version 15.9.0
+[2026-03-23 15:24:47.892] [info] [core_service] signing_information team_id: G43BCU2T37
+[2026-03-23 15:24:47.922] [info] [core_service] Karabiner-Elements.app path: file:///Applications/Karabiner-Elements.app/
+[2026-03-23 15:24:47.963] [info] [core_service] task_policy_set is called.
+[2026-03-23 15:24:47.965] [info] [core_service] session_monitor_receiver is initialized
+[2026-03-23 15:24:47.976] [info] [core_service] receiver is initialized
+[2026-03-23 15:24:47.978] [info] [core_service] receiver: bound
+[2026-03-23 15:24:47.978] [info] [core_service] receiver: chown socket: 0
+[2026-03-23 15:24:47.978] [info] [core_service] session_monitor_receiver: bound
+[2026-03-23 15:24:58.196] [info] [core_service] current_console_user_id: 501
+[2026-03-23 15:24:58.197] [info] [core_service] receiver is terminated
+[2026-03-23 15:24:58.198] [info] [core_service] receiver is initialized
+[2026-03-23 15:24:58.209] [info] [core_service] console_user_server_client is started.
+[2026-03-23 15:24:58.211] [info] [core_service] receiver: bound
+[2026-03-23 15:24:58.211] [info] [core_service] receiver: chown socket: 501
+[2026-03-23 15:24:58.212] [error] [core_service] console_user_server_client connect_failed: Connection refused
+[2026-03-23 15:24:59.746] [error] [core_service] console_user_server_client connect_failed: Connection refused
+[2026-03-23 15:25:00.219] [error] [core_service] console_user_server_client connect_failed: Connection refused
+[2026-03-23 15:25:00.315] [info] [core_service] `system_preferences` is updated.
+[2026-03-23 15:25:00.752] [info] [core_service] console_user_server_client is connected.
+[2026-03-23 15:25:00.768] [info] [core_service] device_grabber is started.
+[2026-03-23 15:25:00.819] [info] [core_service] event_tap_monitor initialized
+[2026-03-23 15:25:00.823] [info] [core_service] Load /Users/ammar/.config/karabiner/karabiner.json...
+[2026-03-23 15:25:00.824] [info] [core_service] core_configuration is updated.
+[2026-03-23 15:25:00.841] [info] [core_service] virtual_hid_device_service_client_ connected
+[2026-03-23 15:25:01.895] [warning] [core_service] virtual_hid_keyboard is not ready. Please wait for a while.
+[2026-03-23 15:25:01.904] [info] [core_service] caps lock is found on Apple Internal Keyboard / Trackpad
+[2026-03-23 15:25:01.957] [info] [core_service] caps lock is found on Karabiner DriverKit VirtualHIDKeyboard 1.8.0
+[2026-03-23 15:25:01.960] [info] [core_service] Karabiner DriverKit VirtualHIDKeyboard 1.8.0 (device_id:4294971123) hid queue value monitor is started (observed).
+[2026-03-23 15:25:02.838] [info] [core_service] virtual_hid_device_service_client_ virtual_hid_keyboard_ready_response: true
+[2026-03-23 15:25:02.839] [info] [core_service] Apple Internal Keyboard / Trackpad (device_id:4294969627) hid queue value monitor is started (grabbed).
+[2026-03-23 15:25:02.840] [info] [core_service] caps_lock_led_state_manager is started: Apple Internal Keyboard / Trackpad
+[2026-03-23 15:25:02.844] [info] [core_service] TouchBarUserDevice (device_id:4294970588) hid queue value monitor is started (grabbed).
+[2026-03-23 15:25:02.844] [info] [core_service] caps_lock_led_state_manager is started: TouchBarUserDevice
+[2026-03-23 17:44:52.477] [info] [core_service] version 15.9.0
+[2026-03-23 17:44:52.551] [info] [core_service] signing_information team_id: G43BCU2T37
+[2026-03-23 17:44:52.632] [info] [core_service] Karabiner-Elements.app path: file:///Applications/Karabiner-Elements.app/
+[2026-03-23 17:44:53.133] [info] [core_service] task_policy_set is called.
+[2026-03-23 17:44:53.135] [info] [core_service] session_monitor_receiver is initialized
+[2026-03-23 17:44:53.159] [info] [core_service] receiver is initialized
+[2026-03-23 17:44:53.246] [info] [core_service] receiver: bound
+[2026-03-23 17:44:53.246] [info] [core_service] receiver: chown socket: 0
+[2026-03-23 17:44:53.246] [info] [core_service] session_monitor_receiver: bound
+[2026-03-23 17:44:58.769] [info] [core_service] current_console_user_id: 501
+[2026-03-23 17:44:58.769] [info] [core_service] receiver is terminated
+[2026-03-23 17:44:58.771] [info] [core_service] receiver is initialized
+[2026-03-23 17:44:58.776] [info] [core_service] console_user_server_client is started.
+[2026-03-23 17:44:58.778] [info] [core_service] receiver: bound
+[2026-03-23 17:44:58.778] [info] [core_service] receiver: chown socket: 501
+[2026-03-23 17:44:58.779] [error] [core_service] console_user_server_client connect_failed: Connection refused
+[2026-03-23 17:44:59.787] [error] [core_service] console_user_server_client connect_failed: Connection refused
+[2026-03-23 17:45:00.792] [error] [core_service] console_user_server_client connect_failed: Connection refused
+[2026-03-23 17:45:00.874] [info] [core_service] `system_preferences` is updated.
+[2026-03-23 23:13:58.830] [info] [core_service] console_user_server_client is connected.
+[2026-03-23 23:13:59.521] [info] [core_service] device_grabber is started.
+[2026-03-23 23:13:59.590] [info] [core_service] event_tap_monitor initialized
+[2026-03-23 23:13:59.594] [info] [core_service] Load /Users/ammar/.config/karabiner/karabiner.json...
+[2026-03-23 23:13:59.594] [info] [core_service] core_configuration is updated.
+[2026-03-23 23:13:59.597] [info] [core_service] virtual_hid_device_service_client_ connected
+[2026-03-23 23:14:00.661] [warning] [core_service] virtual_hid_keyboard is not ready. Please wait for a while.
+[2026-03-23 23:14:00.668] [info] [core_service] caps lock is found on Apple Internal Keyboard / Trackpad
+[2026-03-23 23:14:00.705] [info] [core_service] caps lock is found on Karabiner DriverKit VirtualHIDKeyboard 1.8.0
+[2026-03-23 23:14:00.708] [info] [core_service] Karabiner DriverKit VirtualHIDKeyboard 1.8.0 (device_id:4294971197) hid queue value monitor is started (observed).
+[2026-03-23 23:14:01.602] [info] [core_service] virtual_hid_device_service_client_ virtual_hid_keyboard_ready_response: true
+[2026-03-23 23:14:01.604] [info] [core_service] Apple Internal Keyboard / Trackpad (device_id:4294969630) hid queue value monitor is started (grabbed).
+[2026-03-23 23:14:01.604] [info] [core_service] caps_lock_led_state_manager is started: Apple Internal Keyboard / Trackpad
+[2026-03-23 23:14:01.609] [info] [core_service] TouchBarUserDevice (device_id:4294970660) hid queue value monitor is started (grabbed).
+[2026-03-23 23:14:01.609] [info] [core_service] caps_lock_led_state_manager is started: TouchBarUserDevice
+[2026-03-23 23:14:01.834] [error] [core_service] console_user_server_client error: Connection reset by peer
+[2026-03-23 23:14:01.834] [info] [core_service] console_user_server_client is closed.
+[2026-03-23 23:14:01.834] [info] [core_service] event_tap_monitor terminated
+[2026-03-23 23:14:01.842] [info] [core_service] device_grabber is stopped.
+[2026-03-23 23:14:01.844] [error] [core_service] console_user_server_client connect_failed: Connection refused
+[2026-03-23 23:14:02.840] [error] [core_service] console_user_server_client connect_failed: Connection refused
+[2026-03-23 23:14:02.847] [error] [core_service] console_user_server_client connect_failed: Connection refused
+[2026-03-23 23:14:03.845] [error] [core_service] console_user_server_client connect_failed: Connection refused
+[2026-03-23 23:14:03.849] [error] [core_service] console_user_server_client connect_failed: Connection refused
+[2026-03-23 23:14:04.846] [error] [core_service] console_user_server_client connect_failed: Connection refused
+[2026-03-23 23:14:04.852] [error] [core_service] console_user_server_client connect_failed: Connection refused
+[2026-03-23 23:14:05.856] [error] [core_service] console_user_server_client connect_failed: Connection refused
+[2026-03-23 23:14:06.861] [error] [core_service] console_user_server_client connect_failed: Connection refused
+[2026-03-23 23:14:07.859] [error] [core_service] console_user_server_client connect_failed: Connection refused
+[2026-03-23 23:14:07.862] [error] [core_service] console_user_server_client connect_failed: Connection refused
+[2026-03-24 11:29:54.097] [info] [core_service] version 15.9.0
+[2026-03-24 11:29:54.149] [info] [core_service] signing_information team_id: G43BCU2T37
+[2026-03-24 11:29:54.187] [info] [core_service] Karabiner-Elements.app path: file:///Applications/Karabiner-Elements.app/
+[2026-03-24 11:29:54.210] [info] [core_service] task_policy_set is called.
+[2026-03-24 11:29:54.211] [info] [core_service] session_monitor_receiver is initialized
+[2026-03-24 11:29:54.264] [info] [core_service] receiver is initialized
+[2026-03-24 11:29:54.269] [info] [core_service] session_monitor_receiver: bound
+[2026-03-24 11:29:54.269] [info] [core_service] receiver: bound
+[2026-03-24 11:29:54.269] [info] [core_service] receiver: chown socket: 0
+[2026-03-24 11:30:04.179] [info] [core_service] current_console_user_id: 501
+[2026-03-24 11:30:04.179] [info] [core_service] receiver is terminated
+[2026-03-24 11:30:04.180] [info] [core_service] receiver is initialized
+[2026-03-24 11:30:04.185] [info] [core_service] console_user_server_client is started.
+[2026-03-24 11:30:04.187] [info] [core_service] receiver: bound
+[2026-03-24 11:30:04.187] [info] [core_service] receiver: chown socket: 501
+[2026-03-24 11:30:04.187] [error] [core_service] console_user_server_client connect_failed: Connection refused
+[2026-03-24 11:30:05.200] [error] [core_service] console_user_server_client connect_failed: Connection refused
+[2026-03-24 11:30:06.199] [error] [core_service] console_user_server_client connect_failed: Connection refused
+[2026-03-24 11:30:06.204] [error] [core_service] console_user_server_client connect_failed: Connection refused
+[2026-03-24 11:30:07.084] [info] [core_service] `system_preferences` is updated.
+[2026-03-24 11:30:07.203] [info] [core_service] console_user_server_client is connected.
+[2026-03-24 11:30:07.218] [info] [core_service] device_grabber is started.
+[2026-03-24 11:30:07.270] [info] [core_service] event_tap_monitor initialized
+[2026-03-24 11:30:07.281] [info] [core_service] Load /Users/ammar/.config/karabiner/karabiner.json...
+[2026-03-24 11:30:07.281] [info] [core_service] core_configuration is updated.
+[2026-03-24 11:30:07.285] [info] [core_service] virtual_hid_device_service_client_ connected
+[2026-03-24 11:30:08.345] [warning] [core_service] virtual_hid_keyboard is not ready. Please wait for a while.
+[2026-03-24 11:30:08.349] [info] [core_service] caps lock is found on Apple Internal Keyboard / Trackpad
+[2026-03-24 11:30:08.386] [info] [core_service] caps lock is found on Karabiner DriverKit VirtualHIDKeyboard 1.8.0
+[2026-03-24 11:30:08.389] [info] [core_service] Karabiner DriverKit VirtualHIDKeyboard 1.8.0 (device_id:4294971099) hid queue value monitor is started (observed).
+[2026-03-24 11:30:09.290] [info] [core_service] virtual_hid_device_service_client_ virtual_hid_keyboard_ready_response: true
+[2026-03-24 11:30:09.293] [info] [core_service] Apple Internal Keyboard / Trackpad (device_id:4294969633) hid queue value monitor is started (grabbed).
+[2026-03-24 11:30:09.293] [info] [core_service] caps_lock_led_state_manager is started: Apple Internal Keyboard / Trackpad
+[2026-03-24 11:30:09.298] [info] [core_service] TouchBarUserDevice (device_id:4294970487) hid queue value monitor is started (grabbed).
+[2026-03-24 11:30:09.298] [info] [core_service] caps_lock_led_state_manager is started: TouchBarUserDevice
+[2026-03-24 20:57:17.057] [info] [core_service] version 15.9.0
+[2026-03-24 20:57:17.125] [info] [core_service] signing_information team_id: G43BCU2T37
+[2026-03-24 20:57:17.146] [info] [core_service] Karabiner-Elements.app path: file:///Applications/Karabiner-Elements.app/
+[2026-03-24 20:57:17.170] [info] [core_service] task_policy_set is called.
+[2026-03-24 20:57:17.172] [info] [core_service] session_monitor_receiver is initialized
+[2026-03-24 20:57:17.192] [info] [core_service] receiver is initialized
+[2026-03-24 20:57:17.199] [info] [core_service] receiver: bound
+[2026-03-24 20:57:17.199] [info] [core_service] receiver: chown socket: 0
+[2026-03-24 20:57:17.199] [info] [core_service] session_monitor_receiver: bound
+[2026-03-24 20:57:25.741] [info] [core_service] current_console_user_id: 501
+[2026-03-24 20:57:25.741] [info] [core_service] receiver is terminated
+[2026-03-24 20:57:25.742] [info] [core_service] receiver is initialized
+[2026-03-24 20:57:25.749] [info] [core_service] console_user_server_client is started.
+[2026-03-24 20:57:25.751] [info] [core_service] receiver: bound
+[2026-03-24 20:57:25.751] [info] [core_service] receiver: chown socket: 501
+[2026-03-24 20:57:25.752] [error] [core_service] console_user_server_client connect_failed: Connection refused
+[2026-03-24 20:57:26.760] [error] [core_service] console_user_server_client connect_failed: Connection refused
+[2026-03-24 20:57:27.763] [error] [core_service] console_user_server_client connect_failed: Connection refused
+[2026-03-24 20:57:27.895] [info] [core_service] `system_preferences` is updated.
+[2026-03-24 20:57:28.785] [info] [core_service] console_user_server_client is connected.
+[2026-03-24 20:57:28.957] [info] [core_service] device_grabber is started.
+[2026-03-24 20:57:29.011] [info] [core_service] event_tap_monitor initialized
+[2026-03-24 20:57:29.015] [info] [core_service] Load /Users/ammar/.config/karabiner/karabiner.json...
+[2026-03-24 20:57:29.015] [info] [core_service] core_configuration is updated.
+[2026-03-24 20:57:29.018] [info] [core_service] virtual_hid_device_service_client_ connected
+[2026-03-24 20:57:30.108] [warning] [core_service] virtual_hid_keyboard is not ready. Please wait for a while.
+[2026-03-24 20:57:30.115] [info] [core_service] caps lock is found on Apple Internal Keyboard / Trackpad
+[2026-03-24 20:57:30.163] [info] [core_service] caps lock is found on Karabiner DriverKit VirtualHIDKeyboard 1.8.0
+[2026-03-24 20:57:30.166] [info] [core_service] Karabiner DriverKit VirtualHIDKeyboard 1.8.0 (device_id:4294971184) hid queue value monitor is started (observed).
+[2026-03-24 20:57:31.034] [info] [core_service] virtual_hid_device_service_client_ virtual_hid_keyboard_ready_response: true
+[2026-03-24 20:57:31.035] [info] [core_service] Apple Internal Keyboard / Trackpad (device_id:4294969627) hid queue value monitor is started (grabbed).
+[2026-03-24 20:57:31.035] [info] [core_service] caps_lock_led_state_manager is started: Apple Internal Keyboard / Trackpad
+[2026-03-24 20:57:31.039] [info] [core_service] TouchBarUserDevice (device_id:4294970672) hid queue value monitor is started (grabbed).
+[2026-03-24 20:57:31.039] [info] [core_service] caps_lock_led_state_manager is started: TouchBarUserDevice
+[2026-03-25 07:34:42.709] [info] [core_service] Aavante Bar 610 (device_id:4295029048) is terminated.

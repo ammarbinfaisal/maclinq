@@ -10,84 +10,73 @@ enum MouseForwardEvent {
 
 typealias MouseEventCallback = (MouseForwardEvent) -> Void
 
+private final class MouseCaptureStartupState {
+    var error: Error?
+}
+
 final class MouseCapture {
+    private let stateLock = NSLock()
     private var eventTap: CFMachPort?
     private var runLoopSource: CFRunLoopSource?
+    private var captureRunLoop: CFRunLoop?
+    private var captureThread: Thread?
+    private var stopWaiter: DispatchSemaphore?
     private var callback: MouseEventCallback?
 
     func start(callback: @escaping MouseEventCallback) throws {
-        guard eventTap == nil else {
-            throw NSError(
-                domain: "maclinq-mac",
-                code: 30,
-                userInfo: [NSLocalizedDescriptionKey: "mouse capture is already active"]
-            )
-        }
-        self.callback = callback
+        let startupWaiter = DispatchSemaphore(value: 0)
+        let startupState = MouseCaptureStartupState()
 
-        let trackedTypes: [CGEventType] = [
-            .mouseMoved,
-            .leftMouseDown,
-            .leftMouseUp,
-            .rightMouseDown,
-            .rightMouseUp,
-            .otherMouseDown,
-            .otherMouseUp,
-            .leftMouseDragged,
-            .rightMouseDragged,
-            .otherMouseDragged,
-            .scrollWheel,
-        ]
-        let eventMask = trackedTypes.reduce(CGEventMask(0)) { partial, type in
-            partial | (CGEventMask(1) << type.rawValue)
+        let thread = try withLockedState { () throws -> Thread in
+            guard captureThread == nil else {
+                throw NSError(
+                    domain: "maclinq-mac",
+                    code: 30,
+                    userInfo: [NSLocalizedDescriptionKey: "mouse capture is already active"]
+                )
+            }
+
+            self.callback = callback
+
+            let thread = Thread { [weak self] in
+                self?.runCaptureLoop(startupWaiter: startupWaiter, startupState: startupState)
+            }
+            thread.name = "maclinq.mouse-capture"
+            captureThread = thread
+            return thread
         }
 
-        let selfPtr = Unmanaged.passUnretained(self).toOpaque()
+        thread.start()
+        startupWaiter.wait()
 
-        guard let tap = CGEvent.tapCreate(
-            tap: .cghidEventTap,
-            place: .headInsertEventTap,
-            options: .defaultTap,
-            eventsOfInterest: eventMask,
-            callback: mouseCaptureCallback,
-            userInfo: selfPtr
-        ) else {
-            self.callback = nil
-            throw NSError(
-                domain: "maclinq-mac",
-                code: 31,
-                userInfo: [
-                    NSLocalizedDescriptionKey:
-                        "failed to create mouse CGEventTap; grant Accessibility access to the terminal or app running maclinq-mac in System Settings > Privacy & Security > Accessibility"
-                ]
-            )
+        if let error = startupState.error {
+            throw error
         }
-
-        eventTap = tap
-        runLoopSource = CFMachPortCreateRunLoopSource(kCFAllocatorDefault, tap, 0)
-        if let runLoopSource {
-            CFRunLoopAddSource(CFRunLoopGetMain(), runLoopSource, .commonModes)
-        }
-        CGEvent.tapEnable(tap: tap, enable: true)
 
         print("maclinq-mac: mouse capture started")
     }
 
     func stop() {
-        guard eventTap != nil else {
+        let stopWaiter: DispatchSemaphore? = withLockedState {
+            guard captureThread != nil else {
+                return nil
+            }
+            callback = nil
+            let waiter = DispatchSemaphore(value: 0)
+            self.stopWaiter = waiter
+            return waiter
+        }
+
+        guard let stopWaiter else {
             return
         }
 
-        if let eventTap {
-            CGEvent.tapEnable(tap: eventTap, enable: false)
-            if let runLoopSource {
-                CFRunLoopRemoveSource(CFRunLoopGetMain(), runLoopSource, .commonModes)
-            }
+        if let runLoop = withLockedState({ captureRunLoop }) {
+            CFRunLoopStop(runLoop)
+            CFRunLoopWakeUp(runLoop)
         }
 
-        eventTap = nil
-        runLoopSource = nil
-        callback = nil
+        stopWaiter.wait()
         print("maclinq-mac: mouse capture stopped")
     }
 
@@ -137,6 +126,86 @@ final class MouseCapture {
 
     fileprivate func emit(_ event: MouseForwardEvent) {
         callback?(event)
+    }
+
+    private func runCaptureLoop(startupWaiter: DispatchSemaphore, startupState: MouseCaptureStartupState) {
+        let trackedTypes: [CGEventType] = [
+            .mouseMoved,
+            .leftMouseDown,
+            .leftMouseUp,
+            .rightMouseDown,
+            .rightMouseUp,
+            .otherMouseDown,
+            .otherMouseUp,
+            .leftMouseDragged,
+            .rightMouseDragged,
+            .otherMouseDragged,
+            .scrollWheel,
+        ]
+        let eventMask = trackedTypes.reduce(CGEventMask(0)) { partial, type in
+            partial | (CGEventMask(1) << type.rawValue)
+        }
+
+        let selfPtr = Unmanaged.passUnretained(self).toOpaque()
+
+        guard let tap = CGEvent.tapCreate(
+            tap: .cghidEventTap,
+            place: .headInsertEventTap,
+            options: .defaultTap,
+            eventsOfInterest: eventMask,
+            callback: mouseCaptureCallback,
+            userInfo: selfPtr
+        ) else {
+            withLockedState {
+                callback = nil
+                captureThread = nil
+            }
+            startupState.error = NSError(
+                domain: "maclinq-mac",
+                code: 31,
+                userInfo: [
+                    NSLocalizedDescriptionKey:
+                        "failed to create mouse CGEventTap; grant Accessibility access to the terminal or app running maclinq-mac in System Settings > Privacy & Security > Accessibility"
+                ]
+            )
+            startupWaiter.signal()
+            return
+        }
+
+        let source = CFMachPortCreateRunLoopSource(kCFAllocatorDefault, tap, 0)
+        let runLoop = CFRunLoopGetCurrent()
+
+        withLockedState {
+            eventTap = tap
+            runLoopSource = source
+            captureRunLoop = runLoop
+        }
+
+        CFRunLoopAddSource(runLoop, source, .commonModes)
+        CGEvent.tapEnable(tap: tap, enable: true)
+        startupWaiter.signal()
+        CFRunLoopRun()
+
+        CGEvent.tapEnable(tap: tap, enable: false)
+        CFRunLoopRemoveSource(runLoop, source, .commonModes)
+
+        let waiter = withLockedState { () -> DispatchSemaphore? in
+            eventTap = nil
+            runLoopSource = nil
+            captureRunLoop = nil
+            captureThread = nil
+            let waiter = stopWaiter
+            stopWaiter = nil
+            return waiter
+        }
+        waiter?.signal()
+    }
+
+    @discardableResult
+    private func withLockedState<T>(_ body: () throws -> T) rethrows -> T {
+        stateLock.lock()
+        defer { stateLock.unlock() }
+        return try body()
     }
 }
 
